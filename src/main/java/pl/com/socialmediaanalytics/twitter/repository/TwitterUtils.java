@@ -13,31 +13,7 @@ import java.util.*;
 
 public class TwitterUtils {
 
-    public static Twitter getTwitterInstance() {
 
-        TwitterFactory tf = new TwitterFactory();
-        Twitter twitter = tf.getInstance();
-        return twitter;
-
-    }
-
-
-
-
-    public static List<String> searchtweets(String userQuery) throws TwitterException {
-        Twitter twitter = getTwitterInstance();
-        Query query = new Query(userQuery);
-        QueryResult result = twitter.search(query);
-
-        List<String> tweetList = new ArrayList<String>();
-        result.getTweets();
-        for (Status tweet : result.getTweets()) {
-            String json = TwitterObjectFactory.getRawJSON(tweet);
-            tweetList.add(json);
-        }
-
-        return tweetList;
-    }
 
     public static void streamFeed() {
 
