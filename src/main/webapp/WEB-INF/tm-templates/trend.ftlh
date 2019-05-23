@@ -22,12 +22,14 @@
             text-align: center;
             list-style: none;
         }
+
         a {
 
             text-decoration: none;
             color: black;
 
         }
+
         a:hover {
             background-color: yellow;
             font-size: 40px;
@@ -39,13 +41,14 @@
 <h1>
     Twitter Trends by City (Gdansk)
 </h1>
-
-    <#list trendList as trend>
-        <#list trendListName as trendName>
-            <li> <a href="${trend}">${trendName}</a></li>
-
-        </#list>
+<h2>
+    List Of Option:
+</h2>
+<#list trendList as trend>
+    <#list trendListName as trendName>
+        <li><a href="${trend}">${trendName}</a></li>
     </#list>
+</#list>
 
 </body>
 </html>

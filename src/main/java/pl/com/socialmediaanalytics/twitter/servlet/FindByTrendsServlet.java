@@ -17,41 +17,72 @@ import java.util.*;
 
 @WebServlet("/find-trend")
 public class FindByTrendsServlet extends HttpServlet {
+
     @Inject
     TemplateProvider templateProvider;
+
     @Inject
     TwitterInstance twitterInstance;
 
+    private Trends trends;
+    private List<String> trendList = new ArrayList<>();
+    private List<String> trendListName = new ArrayList<>();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> trendList = new ArrayList<>();
-        List<String>trendListName = new ArrayList<>();
-        PrintWriter printWriter = resp.getWriter();
+        List<String> NAME = new ArrayList<>();
+        List<Integer> WOEID = new ArrayList<>();
 
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
-            Trends trends = twitter.getPlaceTrends(493417);
-
-
-            for (Trend trend: trends.getTrends()) {
-                String url = trend.getURL();
-                trendList.add(url);
-                trendListName.add(trend.getName());
+            ResponseList<Location> locations = twitter.getAvailableTrends();
+            for (Location location : locations) {
+                if (location.getWoeid() == 493417){
+                    WOEID.add(location.getWoeid());
+                }
+                NAME.add(location.getName());
 
             }
         } catch (TwitterException te) {
             te.printStackTrace();
         }
+        for (Integer o:WOEID) {
+            try {
+                Twitter twitter = twitterInstance.getTwitterInstance();
+                trends = twitter.getPlaceTrends(o);
+                for (Trend trend : trends.getTrends()) {
+                    trendList.add(trend.getURL());
+                    trendListName.add(trend.getName());
+                }
 
+            } catch (TwitterException te) {
+                te.printStackTrace();
+
+            }
+        }
+
+        PrintWriter printWriter = resp.getWriter();
+
+
+        Map<String,List<Integer>>dataModelSecond = new HashMap<>();
+        dataModelSecond.put("weoids",WOEID);
         Map<String, List<String>> dateModel = new HashMap<>();
+        dateModel.put("locations",NAME);
         dateModel.put("trendList", trendList);
-        dateModel.put("trendListName",trendListName);
+        dateModel.put("trendListName", trendListName);
         Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");
         try {
             template.process(dateModel, printWriter);
+            template.process(dataModelSecond,printWriter);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req,resp);
     }
 }
