@@ -43,6 +43,7 @@
 //        twitterStream.addListener(listener);
 //
 //        Coordinates coordinates = new Coordinates();
+
 //
 //
 //        FilterQuery filterLocation = new FilterQuery();
