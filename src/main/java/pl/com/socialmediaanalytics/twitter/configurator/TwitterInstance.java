@@ -5,7 +5,6 @@ import twitter4j.TwitterFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 
-
     @ApplicationScoped
     public class TwitterInstance {
 

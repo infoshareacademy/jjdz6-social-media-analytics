@@ -44,11 +44,20 @@
 <h2>
     List Of Option:
 </h2>
+<form action="/find-trend" method="post" >
+    <label for="place">Wybierz miasto: </label>
+    <select  id="place" name="place">
+        <#list weoids as weoid>
+            <option>${weoid}</option>
+        </#list>
+    </select>
+
 <#list trendList as trend>
     <#list trendListName as trendName>
         <li><a href="${trend}">${trendName}</a></li>
     </#list>
 </#list>
+</form>
 
 </body>
 </html>
