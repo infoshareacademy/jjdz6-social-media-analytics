@@ -42,22 +42,12 @@
     Twitter Trends by City (Gdansk)
 </h1>
 <h2>
-    List Of Option:
-</h2>
-<form action="/find-trend" method="post" >
-    <label for="place">Wybierz miasto: </label>
-    <select  id="place" name="place">
-        <#list weoids as weoid>
-            <option>${weoid}</option>
-        </#list>
-    </select>
+    List Of Option:</h2>
 
 <#list trendList as trend>
-    <#list trendListName as trendName>
-        <li><a href="${trend}">${trendName}</a></li>
-    </#list>
+
+    <li><a = href"${trend}">${trend}</a></li>
 </#list>
-</form>
 
 </body>
 </html>

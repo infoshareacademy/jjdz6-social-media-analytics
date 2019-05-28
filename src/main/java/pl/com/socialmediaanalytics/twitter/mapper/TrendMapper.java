@@ -23,24 +23,6 @@ public class TrendMapper {
     @Inject
     TwitterTrendService twitterTrendService;
 
-    private List<String> trendList = new ArrayList<>();
-    private List<String> trendListName = new ArrayList<>();
 
-    private Trends trends;
-
-    public void ListOfTrend() {
-        try {
-            Twitter twitter = twitterInstance.getTwitterInstance();
-            trends = twitter.getPlaceTrends(twitterTrendService.WEOID());
-            for (Trend trend : trends.getTrends()) {
-                trendList.add(trend.getURL());
-                trendListName.add(trend.getName());
-            }
-
-        } catch (TwitterException twitterException) {
-            twitterException.printStackTrace();
-
-        }
-    }
 
 }

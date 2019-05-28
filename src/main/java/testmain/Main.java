@@ -19,8 +19,7 @@ public class Main {
 //        if (stringIntegerMap.keySet().contains("Fresno")){
 //            System.out.println(stringIntegerMap.get("Fresno"));
 //        }
-       TwitterTrendService ts = new TwitterTrendService();
-        System.out.println(ts.WEOID());
+
 
 
     }

@@ -3,6 +3,7 @@ package pl.com.socialmediaanalytics.twitter.servlet;
 import freemarker.template.Template;
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
+import pl.com.socialmediaanalytics.twitter.service.TwitterTrendService;
 import twitter4j.*;
 
 import javax.inject.Inject;
@@ -19,39 +20,52 @@ import java.util.*;
 public class FindByTrendsServlet extends HttpServlet {
 
     @Inject
+    TwitterInstance twitterInstance;
+
+    @Inject
     TemplateProvider templateProvider;
 
+    @Inject
+    TwitterTrendService twitterTrendService;
 
+
+    private List<String> trendList = new ArrayList<>();
+    private List<String> trendListName = new ArrayList<>();
     private Trends trends;
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        String NAME = req.getParameter("NAME");
+        PrintWriter printWriter = resp.getWriter();
 
-//        PrintWriter printWriter = resp.getWriter();
-//        Map<List<String>, List<Integer>> map = new HashMap<>();
-//        map.put(NAME, WOEID);
-//
-//        Map<String,Map<List<String>,List<Integer>>>dataModelSecond = new HashMap<>();
-//        dataModelSecond.put("weoids",map);
-//        Map<String, List<String>> dateModel = new HashMap<>();
-//        dateModel.put("locations",NAME);
-//        dateModel.put("trendList", trendList);
-//        dateModel.put("trendListName", trendListName);
-//        Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");
-//        Template template1 = templateProvider.getTemplate(getServletContext(),"trend.ftlh");
-//        try {
-//            //template.process(dateModel, printWriter);
-//            template1.process(dataModelSecond,printWriter);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
-//
-//
+        try {
+            Twitter twitter = twitterInstance.getTwitterInstance();
+            trends = twitter.getPlaceTrends(twitterTrendService.WEOID(NAME));
+            for (Trend trend : trends.getTrends()) {
+                trendList.add(trend.getURL());
+                trendListName.add(trend.getName());
+            }
+
+        } catch (TwitterException twitterException) {
+            twitterException.printStackTrace();
+
+        }
+
+        Map<String, List<String>> dateModel = new HashMap<>();
+        dateModel.put("trendList", trendList);
+        dateModel.put("trendListName", trendListName);
+        Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");
+
+        try {
+            template.process(dateModel, printWriter);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
+
 }
