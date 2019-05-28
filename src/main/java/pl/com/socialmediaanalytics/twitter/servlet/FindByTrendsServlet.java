@@ -29,16 +29,15 @@ public class FindByTrendsServlet extends HttpServlet {
     TwitterTrendService twitterTrendService;
 
 
-    private List<String> trendList = new ArrayList<>();
-    private List<String> trendListName = new ArrayList<>();
-    private Trends trends;
+
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        List<String> trendList = new ArrayList<>();
+        List<String> trendListName = new ArrayList<>();
+        Trends trends;
         String NAME = req.getParameter("NAME");
-        PrintWriter printWriter = resp.getWriter();
 
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
@@ -47,11 +46,12 @@ public class FindByTrendsServlet extends HttpServlet {
                 trendList.add(trend.getURL());
                 trendListName.add(trend.getName());
             }
-
         } catch (TwitterException twitterException) {
             twitterException.printStackTrace();
 
         }
+
+        PrintWriter writer = resp.getWriter();
 
         Map<String, List<String>> dateModel = new HashMap<>();
         dateModel.put("trendList", trendList);
@@ -59,13 +59,16 @@ public class FindByTrendsServlet extends HttpServlet {
         Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");
 
         try {
-            template.process(dateModel, printWriter);
+            template.process(dateModel, writer);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }
