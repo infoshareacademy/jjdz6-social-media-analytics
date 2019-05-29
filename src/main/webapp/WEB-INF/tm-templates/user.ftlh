@@ -8,8 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-<form method="post" action="/search-user">
-    Take User form #Twitter: <input type="text" name="userOne"/><br/><br/>
+<form method="post" action="search-user">
+    Take User form #Twitter: <input type="text" name="user"/><br/><br/>
     <input type="submit" name="Submit" value="Submit"/><br/><br/>
 </form>
 <#list users as user>

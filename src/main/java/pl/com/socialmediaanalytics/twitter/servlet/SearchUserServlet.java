@@ -4,7 +4,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
-import pl.com.socialmediaanalytics.twitter.service.SearchUserService;
 import twitter4j.ResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -17,11 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.logging.Logger;
 
 @WebServlet("/search-user")
 public class SearchUserServlet extends HttpServlet {
@@ -30,50 +26,42 @@ public class SearchUserServlet extends HttpServlet {
     @Inject
     TwitterInstance twitterInstance;
 
-    @Inject
-    SearchUserService searchUserService;
-
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String us = req.getParameter("user");
         List<String> statusList = new ArrayList<>();
-
-        String userOne = req.getParameter("userOne");
+        Map<String, List<String>> model = new HashMap<>();
+        Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
 
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
-            ResponseList<User> users;
-            int page = 1;
-            do {
-                users = twitter.searchUsers(userOne, page);
+            if (us != null && !us.equals("")) {
+                ResponseList<User> users = twitter.searchUsers(us, 1);
                 for (User user : users) {
-                    if (user.getStatus() != null) {
-                        statusList.add(user.getName());
-                        statusList.add(user.getStatus().getText());
-
-                    } else {
-                    }
+                    statusList.add(user.getName());
+                    statusList.add(user.getStatus().getText());
                 }
-                page++;
-            } while (users.size() != 0 && page < 5);
-
-        } catch (
-                TwitterException te) {
-            te.printStackTrace();
+            }
+            model.put("users", statusList);
+            template.process(model, resp.getWriter());
+        } catch (TwitterException |TemplateException e) {
+            // LOG e
         }
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, List<String>> model = new HashMap<>();
-        model.put("users", statusList);
+        model.put("users", Collections.emptyList());
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
         try {
             template.process(model, resp.getWriter());
         } catch (TemplateException e) {
-            e.printStackTrace();
+            // LOG e
         }
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
-    }
-
 }
+
+
+
+
