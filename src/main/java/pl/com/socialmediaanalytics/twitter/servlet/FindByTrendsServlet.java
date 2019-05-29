@@ -28,17 +28,12 @@ public class FindByTrendsServlet extends HttpServlet {
     @Inject
     TwitterTrendService twitterTrendService;
 
-
-
-
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<String> trendList = new ArrayList<>();
         List<String> trendListName = new ArrayList<>();
         Trends trends;
         String NAME = req.getParameter("NAME");
-
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
             trends = twitter.getPlaceTrends(twitterTrendService.WEOID(NAME));
@@ -48,11 +43,8 @@ public class FindByTrendsServlet extends HttpServlet {
             }
         } catch (TwitterException twitterException) {
             twitterException.printStackTrace();
-
         }
-
         PrintWriter writer = resp.getWriter();
-
         Map<String, List<String>> dateModel = new HashMap<>();
         dateModel.put("trendList", trendList);
         dateModel.put("trendListName", trendListName);

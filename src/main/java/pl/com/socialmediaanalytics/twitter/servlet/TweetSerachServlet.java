@@ -16,7 +16,7 @@ import java.util.List;
 
 @WebServlet("/tweet-search")
 
-public class TwitterSearchServlet extends HttpServlet {
+public class TweetSerachServlet extends HttpServlet {
 
     @Inject
     TwitterSearchService twitterSearchService;

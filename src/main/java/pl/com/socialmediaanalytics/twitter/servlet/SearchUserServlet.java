@@ -4,6 +4,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
+import pl.com.socialmediaanalytics.twitter.service.SearchUserService;
 import twitter4j.ResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -28,22 +29,24 @@ public class SearchUserServlet extends HttpServlet {
     TemplateProvider templateProvider;
     @Inject
     TwitterInstance twitterInstance;
+
+    @Inject
+    SearchUserService searchUserService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String>statusList = new ArrayList<>();
-        List<String>userImage = new ArrayList<>();
+        List<String> statusList = new ArrayList<>();
 
-       String searchUser = req.getParameter("user");
-        Twitter twitter = twitterInstance.getTwitterInstance();
-        PrintWriter p = resp.getWriter();
+        String userOne = req.getParameter("userOne");
+
         try {
+            Twitter twitter = twitterInstance.getTwitterInstance();
             ResponseList<User> users;
             int page = 1;
             do {
-                users = twitter.searchUsers(searchUser,page);
+                users = twitter.searchUsers(userOne, page);
                 for (User user : users) {
                     if (user.getStatus() != null) {
-                       userImage.add(user.getBiggerProfileImageURL());
                         statusList.add(user.getName());
                         statusList.add(user.getStatus().getText());
 
@@ -53,20 +56,24 @@ public class SearchUserServlet extends HttpServlet {
                 page++;
             } while (users.size() != 0 && page < 5);
 
-        } catch (TwitterException te) {
+        } catch (
+                TwitterException te) {
             te.printStackTrace();
         }
 
-        Template template = templateProvider.getTemplate(getServletContext(),"user.ftlh");
-        Map<String,List<String>>model = new HashMap<>();
-        model.put("users",statusList);
-        model.put("userImage",userImage);
-
+        Map<String, List<String>> model = new HashMap<>();
+        model.put("users", statusList);
+        Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
         try {
-            template.process(model,p);
-        }catch (TemplateException e){
+            template.process(model, resp.getWriter());
+        } catch (TemplateException e) {
             e.printStackTrace();
         }
-
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
+
 }

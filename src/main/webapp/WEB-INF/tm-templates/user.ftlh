@@ -8,12 +8,12 @@
     <title>Document</title>
 </head>
 <body>
-
+<form method="post" action="/search-user">
+    Take User form #Twitter: <input type="text" name="userOne"/><br/><br/>
+    <input type="submit" name="Submit" value="Submit"/><br/><br/>
+</form>
 <#list users as user>
     <li>${user}</li>
-</#list>
-<#list userImage as image>
-    <li><img src="${image}" alt="BARK ZDJĘCIA "></li>
 </#list>
 </body>
 </html>

@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Find By Trend</title>
     <style>
         * {
             background-color: #3aabef;
@@ -46,7 +46,7 @@
             color: whitesmoke;
         }
 
-        li {
+        ol {
             font-size: 21px;
             text-align: center;
             list-style: none;
@@ -55,14 +55,14 @@
         a {
 
             text-decoration: none;
-            color: black;
+            color: whitesmoke;
 
         }
 
         a:hover {
-            background-color: mintcream;
+
             font-size: 20px;
-            color: black;
+
         }
 
         button:hover {
@@ -86,8 +86,10 @@
 </div>
 
 <h2>#List Of Trends</h2>
+
 <#list trendList as trend>
-    <li><ol><a href="${trend}">${trend}</a></ol></li>
+    <ol><a href="${trend}">${trend}</a></ol>
 </#list>
+
 </body>
 </html>
