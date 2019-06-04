@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Logger;
+
 
 @WebServlet("/search-user")
 public class SearchUserServlet extends HttpServlet {
@@ -40,11 +40,13 @@ public class SearchUserServlet extends HttpServlet {
                 for (User user : users) {
                     statusList.add(user.getName());
                     statusList.add(user.getStatus().getText());
+
+
                 }
             }
             model.put("users", statusList);
             template.process(model, resp.getWriter());
-        } catch (TwitterException |TemplateException e) {
+        } catch (TwitterException | TemplateException e) {
             // LOG e
         }
     }

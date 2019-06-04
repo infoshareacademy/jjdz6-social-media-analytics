@@ -1,6 +1,7 @@
 package pl.com.socialmediaanalytics.twitter.servlet;
 
 import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
 import pl.com.socialmediaanalytics.twitter.service.TwitterTrendService;
@@ -30,24 +31,11 @@ public class FindByTrendsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> trendList = new ArrayList<>();
-        List<String> trendListName = new ArrayList<>();
-        Trends trends;
-        String NAME = req.getParameter("NAME");
-        try {
-            Twitter twitter = twitterInstance.getTwitterInstance();
-            trends = twitter.getPlaceTrends(twitterTrendService.WEOID(NAME));
-            for (Trend trend : trends.getTrends()) {
-                trendList.add(trend.getURL());
-                trendListName.add(trend.getName());
-            }
-        } catch (TwitterException twitterException) {
-            twitterException.printStackTrace();
-        }
+
         PrintWriter writer = resp.getWriter();
         Map<String, List<String>> dateModel = new HashMap<>();
-        dateModel.put("trendList", trendList);
-        dateModel.put("trendListName", trendListName);
+        dateModel.put("trendList", Collections.emptyList());
+        dateModel.put("trendListName", Collections.emptyList());
         Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");
 
         try {
@@ -61,6 +49,25 @@ public class FindByTrendsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        List<String> trendList = new ArrayList<>();
+        List<String> trendListName = new ArrayList<>();
+        Map<String, List<String>> model = new HashMap<>();
+        Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");
+        Trends trends;
+        String NAME = req.getParameter("NAME");
+        try {
+            Twitter twitter = twitterInstance.getTwitterInstance();
+            trends = twitter.getPlaceTrends(twitterTrendService.WEOID(NAME));
+
+            for (Trend trend : trends.getTrends()) {
+                trendList.add(trend.getURL());
+                trendListName.add(trend.getName());
+            }
+            model.put("trendList", trendList);
+            model.put("trendListName", trendListName);
+            template.process(model, resp.getWriter());
+        } catch (TwitterException | TemplateException twitterException) {
+            twitterException.printStackTrace();
+        }
     }
 }

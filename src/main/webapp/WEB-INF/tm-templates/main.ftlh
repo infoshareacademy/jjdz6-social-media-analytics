@@ -54,6 +54,7 @@
             color: #FFF;
             text-decoration: none;
         }
+
         .nav-right {
             float: right;
             line-height: 39px;
@@ -103,5 +104,6 @@
 </nav>
 <div class="footer">
     <#include "footer.ftlh">
+</div>
 </body>
 </html>
