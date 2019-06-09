@@ -82,6 +82,9 @@
 <#list users as user>
     <li>${user}</li>
 </#list>
+<#list imagesUsers as image>
+    <li><img src="${image}" alt="BRAK ZDJĘCIA"></li>
+</#list>
 
 
 <div class="footer">

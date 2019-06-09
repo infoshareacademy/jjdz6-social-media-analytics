@@ -30,6 +30,7 @@ public class SearchUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String us = req.getParameter("user");
         List<String> statusList = new ArrayList<>();
+        List<String> imageURLlist = new ArrayList<>();
         Map<String, List<String>> model = new HashMap<>();
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
 
@@ -40,11 +41,13 @@ public class SearchUserServlet extends HttpServlet {
                 for (User user : users) {
                     statusList.add(user.getName());
                     statusList.add(user.getStatus().getText());
+                    imageURLlist.add(user.getProfileImageURL());
 
 
                 }
             }
             model.put("users", statusList);
+            model.put("imagesUsers", imageURLlist);
             template.process(model, resp.getWriter());
         } catch (TwitterException | TemplateException e) {
             // LOG e
@@ -55,6 +58,7 @@ public class SearchUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, List<String>> model = new HashMap<>();
         model.put("users", Collections.emptyList());
+        model.put("imagesUsers", Collections.emptyList());
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
         try {
             template.process(model, resp.getWriter());

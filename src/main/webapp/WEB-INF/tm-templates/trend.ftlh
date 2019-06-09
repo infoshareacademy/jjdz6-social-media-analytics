@@ -91,5 +91,9 @@
     <ol><a href="${trend}">${trend}</a></ol>
 </#list>
 
+<#list dateList as date>
+    ${date}
+</#list>
+
 </body>
 </html>
