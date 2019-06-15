@@ -13,7 +13,6 @@
             font-family: 'Lato', sans-serif;
         }
 
-
         img {
             height: 300px;
             width: 600px;
@@ -88,12 +87,7 @@
 <h2>#List Of Trends</h2>
 
 <#list trendList as trend>
-    <ol><a href="${trend}">${trend}</a></ol>
+    <ol><a href="${trend.URL}">${trend.name}</a></ol>
 </#list>
-
-<#list dateList as date>
-    ${date}
-</#list>
-
 </body>
 </html>

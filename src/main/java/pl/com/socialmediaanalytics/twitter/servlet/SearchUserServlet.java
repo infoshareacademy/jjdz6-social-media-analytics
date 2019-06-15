@@ -4,6 +4,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
+import pl.com.socialmediaanalytics.twitter.dto.UserDTO;
 import twitter4j.ResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -29,9 +30,8 @@ public class SearchUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String us = req.getParameter("user");
-        List<String> statusList = new ArrayList<>();
-        List<String> imageURLlist = new ArrayList<>();
-        Map<String, List<String>> model = new HashMap<>();
+        List<UserDTO> statusList = new ArrayList<>();
+        Map<String, List<UserDTO>> model = new HashMap<>();
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
 
         try {
@@ -39,15 +39,11 @@ public class SearchUserServlet extends HttpServlet {
             if (us != null && !us.equals("")) {
                 ResponseList<User> users = twitter.searchUsers(us, 1);
                 for (User user : users) {
-                    statusList.add(user.getName());
-                    statusList.add(user.getStatus().getText());
-                    imageURLlist.add(user.getProfileImageURL());
 
-
+                    statusList.add(new UserDTO(user.getName(), user.getStatus().getText(), user.getProfileImageURL()));
                 }
             }
             model.put("users", statusList);
-            model.put("imagesUsers", imageURLlist);
             template.process(model, resp.getWriter());
         } catch (TwitterException | TemplateException e) {
             // LOG e
@@ -58,7 +54,6 @@ public class SearchUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, List<String>> model = new HashMap<>();
         model.put("users", Collections.emptyList());
-        model.put("imagesUsers", Collections.emptyList());
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
         try {
             template.process(model, resp.getWriter());

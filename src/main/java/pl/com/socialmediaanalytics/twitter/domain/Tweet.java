@@ -1,11 +1,13 @@
 package pl.com.socialmediaanalytics.twitter.domain;
 
+import pl.com.socialmediaanalytics.twitter.dto.UserDTO;
+
 public class Tweet {
 
         String createdAt;
         Long id;
         String text;
-        User user;
+        UserDTO user;
 
         public String getCreatedAt() {
             return createdAt;
@@ -19,7 +21,7 @@ public class Tweet {
             return text;
         }
 
-        public User getUser() {
+        public UserDTO getUser() {
             return user;
         }
 
@@ -35,7 +37,7 @@ public class Tweet {
             this.text = text;
         }
 
-        public void setUser(User user) {
+        public void setUser(UserDTO user) {
             this.user = user;
         }
 

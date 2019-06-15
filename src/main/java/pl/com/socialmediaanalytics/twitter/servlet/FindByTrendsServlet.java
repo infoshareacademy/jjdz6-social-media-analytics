@@ -4,6 +4,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
+import pl.com.socialmediaanalytics.twitter.dto.TrendDTO;
 import pl.com.socialmediaanalytics.twitter.service.TwitterTrendService;
 import twitter4j.*;
 
@@ -34,50 +35,29 @@ public class FindByTrendsServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
         Map<String, List<String>> dateModel = new HashMap<>();
-        Map<String, List<Date>> dateTrend = new HashMap<>();
-        dateTrend.put("dateList",Collections.emptyList());
         dateModel.put("trendList", Collections.emptyList());
-        dateModel.put("trendListName", Collections.emptyList());
         Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");
-
-
         try {
             template.process(dateModel, writer);
-            template.process(dateTrend,writer);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> trendList = new ArrayList<>();
-        List<String> trendListName = new ArrayList<>();
-        List<Date>trendDate = new ArrayList<>();
-        Map<String, List<String>> model = new HashMap<>();
-        Map<String,List<Date>>dateModel = new HashMap<>();
+        List<TrendDTO> trendList = new ArrayList<>();
+        Map<String, List<TrendDTO>> model = new HashMap<>();
         Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");
         Trends trends;
         String NAME = req.getParameter("NAME");
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
             trends = twitter.getPlaceTrends(twitterTrendService.WEOID(NAME));
-
             for (Trend trend : trends.getTrends()) {
-                trendList.add(trend.getURL());
-                trendListName.add(trend.getName());
+                trendList.add(new TrendDTO(trend.getName(), trend.getQuery(), trend.getURL()));
             }
-
-
-
-
-            dateModel.put("dateList",trendDate);
             model.put("trendList", trendList);
-            model.put("trendListName", trendListName);
             template.process(model, resp.getWriter());
-            template.process(dateModel,resp.getWriter());
         } catch (TwitterException | TemplateException twitterException) {
             twitterException.printStackTrace();
         }

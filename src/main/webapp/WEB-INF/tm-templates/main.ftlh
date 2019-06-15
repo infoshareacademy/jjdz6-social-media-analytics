@@ -1,78 +1,73 @@
-<html xmlns="http://www.w3.org/1999/html">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-    <title>TwitterApp</title>
+    <title>Navigation Bar</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            background-color: #3aabef;
-            font-family: 'Lato', sans-serif;
+        body {
+            background: #3aabef;
+            font: normal 300 18px "Roboto", sans-serif;
         }
 
-        h1 {
+        #menu-nav {
+            max-width: 1000px;
+            margin: 130px auto;
+            background-color: #ecf0f1;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #navigation-bar ul {
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        #navigation-bar li {
+            float: left;
+            width: 20%;
+        }
+
+        #navigation-bar li:hover a::before {
+            right: 0;
+            left: 0;
+        }
+
+        #navigation-bar a {
+            color: #848484;
+            font-size: 20px;
+            text-decoration: none;
             text-align: center;
-            font-size: 40px;
-            color: whitesmoke;
-        }
-
-
-        .container {
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .navbar {
             padding: 20px 0;
-            margin-bottom: 20px;
-            width: 100%;
-            height: auto;
-
+            display: block;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .logo, .nav {
-            display: inline-block;
-            margin: 0;
+        #navigation-bar a:hover {
+            color: #e74c3c;
         }
 
-        .nav {
-            padding: 0;
-            margin: 0;
+        #navigation-bar a::before {
+            content: "";
+            transition: all 0.4s ease-in-out;
+            position: absolute;
+            right: 50%;
+            left: 50%;
+            bottom: 0;
+            height: 2px;
+            background-color: #e74c3c;
+        }
+
+        #navigation-bar a:hover::before {
+            right: 0;
+            left: 0;
+        }
+
+        li {
             list-style: none;
         }
-
-        .nav li {
-            display: inline-block;
-            margin-left: 40px;
-        }
-
-        .navbar a {
-            color: #FFF;
-            text-decoration: none;
-        }
-
-        .nav-right {
-            float: right;
-            line-height: 39px;
-        }
-
-        .navbar a:hover {
-            color: #DDD;
-        }
-
-
-        img {
-            display: block;
-            margin: 0 auto;
-            height: 200px;
-            width: 200px;
-
-        }
-
 
         .footer {
             background-color: #FFF;
@@ -82,28 +77,28 @@
             text-align: center;
             color: white;
 
+
         }
-
-
     </style>
 </head>
+
 <body>
-<header>
-    <h1>The Social Media Analitycs Application by #Twitter </h1>
-</header>
-<img src="https://aderouler.net/wp-content/uploads/2017/08/aderouler.net-twitterdev-gear.png"/>
-<nav class="navbar">
-    <div class="container">
-        <h1 class="logo"><a href="https://twitter.com">#Go to Twitter</a></h1>
-        <ul class="nav nav-right">
-            <li><a href="find-trend">Find Trend By Country/City</a></li>
-            <li><a href="search-user">Find User</a></li>
-            <li><a href="tweet-search">Tweet Finder</a></li>
+
+<div id="menu-nav">
+    <div id="navigation-bar">
+        <ul>
+            <li><a href="find-trend"><i class="fas fa-poll"></i><span>Trend</span></a></li>
+            <li><a href="map-trends"><i class="fas fa-globe-americas"></i><span>Trend Map</span></a></li>
+            <li><a href="tweet-search"><i class="fab fa-twitter-square"></i><span>Tearch Tweet</span></a></li>
+            <li><a href="search-user"><i class="fa fa-user"></i><span>Search User</span></a></li>
+            <li><a href="stream-map"><i class="fas fa-stream"></i> <span>Tweet stream</span></a></li>
         </ul>
     </div>
-</nav>
+
+</div>
+
+</body>
 <div class="footer">
     <#include "footer.ftlh">
 </div>
-</body>
 </html>

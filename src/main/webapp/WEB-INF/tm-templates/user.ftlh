@@ -68,6 +68,10 @@
 
         }
 
+        .nameUser {
+            font-size: 30px;
+        }
+
     </style>
 </head>
 <body>
@@ -79,11 +83,11 @@
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
 </div>
+
 <#list users as user>
-    <li>${user}</li>
-</#list>
-<#list imagesUsers as image>
-    <li><img src="${image}" alt="BRAK ZDJĘCIA"></li>
+    <li class="nameUser">${user.name}</li>
+    <li>${user.status}</li>
+    <li><img src="${user.imageURL}" alt="dsdsdsd"></li>
 </#list>
 
 
