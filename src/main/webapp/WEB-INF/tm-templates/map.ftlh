@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Custom Popups</title>
+    <title>#Trend Map</title>
     <style>
         /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
@@ -15,6 +15,14 @@
             height: 100%;
             margin: 0;
             padding: 0;
+            background-color: #3aabef;
+        }
+      .form {
+            background-color: white;
+            background-image: url('searchicon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding-left: 40px;
         }
 
         #content a {
@@ -74,7 +82,16 @@
     </style>
 </head>
 <body>
+
+<div class="form">
+    <form method="post" action="map-trends">
+        Country/City: <input type="text" name="place"/><br/><br/>
+        <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
+    </form>
+</div>
+
 <div id="map"></div>
+
 <div id="content">
        <a href="${trends.URL}">${trends.name}</a>
 </div>
@@ -87,7 +104,7 @@
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: lat, lng: lnn},
-            zoom: 10,
+            zoom: 5,
         });
 
         Popup = createPopupClass();

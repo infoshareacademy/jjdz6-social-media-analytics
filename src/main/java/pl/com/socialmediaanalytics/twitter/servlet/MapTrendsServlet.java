@@ -32,7 +32,7 @@ public class MapTrendsServlet extends HttpServlet {
     TemplateProvider templateProvider;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey("AIzaSyB7PCQggzOtF1cQbGw_Gfho06NLBApfvBA")
@@ -40,7 +40,7 @@ public class MapTrendsServlet extends HttpServlet {
         GeocodingResult[] results = new GeocodingResult[0];
         try {
             results = GeocodingApi.geocode(context,
-                    "Paris").await();
+                    req.getParameter("place")).await();
         } catch (ApiException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -53,9 +53,6 @@ public class MapTrendsServlet extends HttpServlet {
         Double lat = results[0].geometry.location.lat;
         Double ln = results[0].geometry.location.lng;
         Map<String, Object> model = new HashMap<>();
-
-        List<TrendDTO> trendList = new ArrayList<>();
-        String name = "";
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
             ResponseList<Location> locations = twitter.getClosestTrends(new GeoLocation(lat, ln));
@@ -81,6 +78,20 @@ public class MapTrendsServlet extends HttpServlet {
 
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("lat",new Object());
+        model.put("ln",new Object());
+        model.put("trends",new Object());
+        Template template = templateProvider.getTemplate(getServletContext(), "map.ftlh");
+        try {
+            template.process(model, resp.getWriter());
+        } catch (TemplateException te) {
+            te.printStackTrace();
+        }
+    }
 }
 

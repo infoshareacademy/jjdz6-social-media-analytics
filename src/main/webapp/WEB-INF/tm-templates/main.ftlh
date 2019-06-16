@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Navigation Bar</title>
+    <title>Social Meida Analytics</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
     <style>
@@ -75,9 +75,7 @@
             bottom: 0;
             width: 100%;
             text-align: center;
-            color: white;
-
-
+            color: black;
         }
     </style>
 </head>
@@ -89,9 +87,7 @@
         <ul>
             <li><a href="find-trend"><i class="fas fa-poll"></i><span>Trend</span></a></li>
             <li><a href="map-trends"><i class="fas fa-globe-americas"></i><span>Trend Map</span></a></li>
-            <li><a href="tweet-search"><i class="fab fa-twitter-square"></i><span>Tearch Tweet</span></a></li>
             <li><a href="search-user"><i class="fa fa-user"></i><span>Search User</span></a></li>
-            <li><a href="stream-map"><i class="fas fa-stream"></i> <span>Tweet stream</span></a></li>
         </ul>
     </div>
 

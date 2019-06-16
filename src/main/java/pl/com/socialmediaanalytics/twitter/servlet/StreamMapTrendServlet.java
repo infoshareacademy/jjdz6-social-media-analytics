@@ -49,13 +49,9 @@ public class StreamMapTrendServlet extends HttpServlet {
 
         StatusListener listener = new StatusListener() {
             public void onStatus(Status status) {
-                try {
-                    resp.getWriter().write(status.getText());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 
+
+            }
             public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
             }
 
@@ -75,7 +71,11 @@ public class StreamMapTrendServlet extends HttpServlet {
             public void onException(Exception ex) {
                 ex.printStackTrace();
             }
+
         };
+
+
+
 
         twitterStream.addListener(listener);
         // sample() method internally creates a thread which manipulates TwitterStream and calls these adequate listener methods continuously.
