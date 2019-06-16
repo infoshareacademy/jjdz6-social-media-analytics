@@ -14,19 +14,13 @@ public class TwitterSearchService {
     @Inject
     TwitterInstanceService twitterInstanceService;
 
-    public List<String> searchtweets(String userQuery) throws TwitterException {
+    public List<Status> searchtweets(String userQuery) throws TwitterException {
+
         Twitter twitter = twitterInstanceService.getTwitterInstance();
         Query query = new Query(userQuery);
         QueryResult result = twitter.search(query);
 
-        List<String> tweetList = new ArrayList<String>();
-        result.getTweets();
-        for (Status tweet : result.getTweets()) {
-            String json = TwitterObjectFactory.getRawJSON(tweet);
-            tweetList.add(json);
-        }
-
-        return tweetList;
+        return result.getTweets();
     }
 
 
