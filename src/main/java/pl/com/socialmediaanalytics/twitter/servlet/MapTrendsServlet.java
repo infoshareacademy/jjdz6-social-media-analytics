@@ -13,6 +13,7 @@ import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
 import pl.com.socialmediaanalytics.twitter.dto.TrendDTO;
 import pl.com.socialmediaanalytics.twitter.model.Coordinates;
 import pl.com.socialmediaanalytics.twitter.service.TrendMapService;
+import pl.com.socialmediaanalytics.twitter.service.TrendService;
 import twitter4j.*;
 
 import javax.inject.Inject;
@@ -28,41 +29,29 @@ import java.util.*;
 @WebServlet("/map-trends")
 
 public class MapTrendsServlet extends HttpServlet {
-    @Inject
-    TwitterInstance twitterInstance;
 
     @Inject
     TemplateProvider templateProvider;
 
     @Inject
+    TrendService trendService;
+
+    @Inject
     TrendMapService trendMapService;
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-
         String param =  req.getParameter("place");
+        TrendDTO dt = trendService.getTrendDTObyCoordinates(param);
         Coordinates coordinates = trendMapService.getCoordinates(param);
 
-
         Map<String, Object> model = new HashMap<>();
-        try {
-            Twitter twitter = twitterInstance.getTwitterInstance();
-            ResponseList<Location> locations = twitter.getClosestTrends(new GeoLocation(coordinates.getLat(), coordinates.getLn()));
-            Location loc = locations.get(0);
-            Trends trends = twitter.getPlaceTrends(loc.getWoeid());
-            for (Trend trend : trends.getTrends()) {
+        model.put("trends",dt);
+        model.put("coord",coordinates);
 
-                TrendDTO td = new TrendDTO(trend.getName(), trend.getQuery(), trend.getURL());
-
-                model.put("coord", coordinates);
-                model.put("trends", td);
-            }
-        } catch (TwitterException e) {
-            e.printStackTrace();
-
-        }
 
         Template template = templateProvider.getTemplate(getServletContext(), "map.ftlh");
         try {
@@ -75,7 +64,6 @@ public class MapTrendsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
         Map<String, Object> model = new HashMap<>();
         model.put("lat",new Object());
