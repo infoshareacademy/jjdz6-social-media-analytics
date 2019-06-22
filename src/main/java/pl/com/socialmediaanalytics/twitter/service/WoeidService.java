@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 
 @RequestScoped
-public class TwitterTrendService  {
+public class WoeidService {
     @Inject
     TrendLocationService trendLocationService;
     public Integer weoid(String name) {

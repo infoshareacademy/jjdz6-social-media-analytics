@@ -1,23 +1,14 @@
 package pl.com.socialmediaanalytics.twitter.servlet;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.maps.GeoApiContext;
-import com.google.maps.GeocodingApi;
-import com.google.maps.errors.ApiException;
-import com.google.maps.model.GeocodingResult;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
-import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
 import pl.com.socialmediaanalytics.twitter.dto.TrendDTO;
 import pl.com.socialmediaanalytics.twitter.model.Coordinates;
 import pl.com.socialmediaanalytics.twitter.service.TrendMapService;
-import pl.com.socialmediaanalytics.twitter.service.TrendService;
-import twitter4j.*;
+import pl.com.socialmediaanalytics.twitter.service.TrendTDOService;
 
 import javax.inject.Inject;
-import javax.persistence.OneToMany;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +25,7 @@ public class MapTrendsServlet extends HttpServlet {
     TemplateProvider templateProvider;
 
     @Inject
-    TrendService trendService;
+    TrendTDOService trendTDOService;
 
     @Inject
     TrendMapService trendMapService;
@@ -45,7 +36,7 @@ public class MapTrendsServlet extends HttpServlet {
 
 
         String param =  req.getParameter("place");
-        TrendDTO dt = trendService.getTrendDTObyCoordinates(param);
+        TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(param);
         Coordinates coordinates = trendMapService.getCoordinates(param);
 
         Map<String, Object> model = new HashMap<>();

@@ -5,7 +5,7 @@ import freemarker.template.TemplateException;
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
 import pl.com.socialmediaanalytics.twitter.dto.TrendDTO;
-import pl.com.socialmediaanalytics.twitter.service.TwitterTrendService;
+import pl.com.socialmediaanalytics.twitter.service.WoeidService;
 import twitter4j.*;
 
 import javax.inject.Inject;
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 
 @WebServlet("/find-trend")
@@ -28,17 +27,16 @@ public class FindByTrendsServlet extends HttpServlet {
     TemplateProvider templateProvider;
 
     @Inject
-    TwitterTrendService twitterTrendService;
+    WoeidService woeidService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        PrintWriter writer = resp.getWriter();
         Map<String, List<String>> dateModel = new HashMap<>();
         dateModel.put("trendList", Collections.emptyList());
         Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");
         try {
-            template.process(dateModel, writer);
+            template.process(dateModel, resp.getWriter());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,10 +47,10 @@ public class FindByTrendsServlet extends HttpServlet {
         Map<String, List<TrendDTO>> model = new HashMap<>();
         Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");
         Trends trends;
-        String NAME = req.getParameter("NAME");
+        String name = req.getParameter("name");
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
-            trends = twitter.getPlaceTrends(twitterTrendService.weoid(NAME));
+            trends = twitter.getPlaceTrends(woeidService.weoid(name));
             for (Trend trend : trends.getTrends()) {
 
             }

@@ -2,16 +2,9 @@ package pl.com.socialmediaanalytics.twitter.mapper;
 
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
-import pl.com.socialmediaanalytics.twitter.service.TwitterTrendService;
-import twitter4j.Trend;
-import twitter4j.Trends;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
+import pl.com.socialmediaanalytics.twitter.service.WoeidService;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class TrendMapper {
     @Inject
@@ -21,7 +14,7 @@ public class TrendMapper {
     TwitterInstance twitterInstance;
 
     @Inject
-    TwitterTrendService twitterTrendService;
+    WoeidService woeidService;
 
 
 

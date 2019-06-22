@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 @Stateless
-public class TrendService {
+public class TrendTDOService {
 
     @Inject
     TwitterInstance twitterInstance;

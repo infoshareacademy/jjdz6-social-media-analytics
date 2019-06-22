@@ -7,12 +7,14 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import java.util.*;
 
 @RequestScoped
 public class TrendLocationService {
 
-    private TwitterInstance twitterInstance = new TwitterInstance();
+    @Inject
+    TwitterInstance twitterInstance;
 
     private List<String> nameList = new ArrayList<>();
     private List<Integer> woeidList = new ArrayList<>();
