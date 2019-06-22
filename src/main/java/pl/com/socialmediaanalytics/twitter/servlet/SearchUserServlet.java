@@ -5,6 +5,7 @@ import freemarker.template.TemplateException;
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
 import pl.com.socialmediaanalytics.twitter.dto.UserDTO;
+import pl.com.socialmediaanalytics.twitter.service.SearchUserService;
 import twitter4j.ResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -24,30 +25,27 @@ import java.util.*;
 public class SearchUserServlet extends HttpServlet {
     @Inject
     TemplateProvider templateProvider;
+
     @Inject
-    TwitterInstance twitterInstance;
+    SearchUserService searchUserService;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String us = req.getParameter("user");
-        List<UserDTO> statusList = new ArrayList<>();
+        String user = req.getParameter("user");
+        List<UserDTO> statusList = searchUserService.userDTOList(user);
         Map<String, List<UserDTO>> model = new HashMap<>();
+
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
 
-        try {
-            Twitter twitter = twitterInstance.getTwitterInstance();
-            if (us != null && !us.equals("")) {
-                ResponseList<User> users = twitter.searchUsers(us, 1);
-                for (User user : users) {
+        model.put("users", statusList);
 
-                    statusList.add(new UserDTO(user.getName(), user.getStatus().getText(), user.getProfileImageURL()));
-                }
-            }
-            model.put("users", statusList);
+        try {
             template.process(model, resp.getWriter());
-        } catch (TwitterException | TemplateException e) {
-            // LOG e
+        } catch (TemplateException e) {
+            e.printStackTrace();
         }
+
+
     }
 
     @Override
@@ -58,7 +56,7 @@ public class SearchUserServlet extends HttpServlet {
         try {
             template.process(model, resp.getWriter());
         } catch (TemplateException e) {
-            // LOG e
+           e.printStackTrace();
         }
     }
 }
