@@ -14,52 +14,52 @@ public class TrendLocationService {
 
     private TwitterInstance twitterInstance = new TwitterInstance();
 
-    private List<String> NAME = new ArrayList<>();
-    private List<Integer> WOEID = new ArrayList<>();
-    private Map<String, Integer> NAME_WEOID = new LinkedHashMap<>();
+    private List<String> nameList = new ArrayList<>();
+    private List<Integer> woeidList = new ArrayList<>();
+    private Map<String, Integer> name_woeid = new LinkedHashMap<>();
 
-    private void fillNAME() {
+    private void fillNameList() {
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
             ResponseList<Location> locations = twitter.getAvailableTrends();
             for (Location location : locations) {
-                NAME.add(location.getName());
+                nameList.add(location.getName());
             }
         } catch (TwitterException te) {
             te.printStackTrace();
         }
     }
 
-    private void fillWEOID() {
+    private void fillWoeidList() {
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
             ResponseList<Location> locations = twitter.getAvailableTrends();
             for (Location location : locations) {
-                WOEID.add(location.getWoeid());
+                woeidList.add(location.getWoeid());
             }
         } catch (TwitterException te) {
             te.printStackTrace();
         }
     }
 
-    public List<String> listNAME() {
-        if (NAME.size() == 0) {
-            fillNAME();
+    public List<String> listName() {
+        if (nameList.size() == 0) {
+            fillNameList();
         }
-        return NAME;
+        return nameList;
     }
 
-    public List<Integer> listWEOID() {
-        if (WOEID.size() == 0) {
-            fillWEOID();
+    public List<Integer> listWoeid() {
+        if (woeidList.size() == 0) {
+            fillWoeidList();
         }
-        return WOEID;
+        return woeidList;
     }
 
     public Map<String, Integer> name_weoid_map() {
-        for (int i = 0; i < listWEOID().size(); i++) {
-            NAME_WEOID.put(listNAME().get(i), listWEOID().get(i));
+        for (int i = 0; i < listWoeid().size(); i++) {
+            name_woeid.put(listName().get(i), listWoeid().get(i));
         }
-        return NAME_WEOID;
+        return name_woeid;
     }
 }

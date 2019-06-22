@@ -98,8 +98,8 @@
 <script>
 
     var map, popup, Popup;
-    var lat = parseFloat(${lat});
-    var lnn = parseFloat(${ln});
+    var lat = parseFloat(${coord.lat});
+    var lnn = parseFloat(${coord.ln});
     /** Initializes the map and the custom popup. */
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {

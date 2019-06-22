@@ -10,9 +10,9 @@ import javax.inject.Inject;
 public class TwitterTrendService  {
     @Inject
     TrendLocationService trendLocationService;
-    public Integer WEOID(String NAME) {
-        if (trendLocationService.name_weoid_map().containsKey(NAME)) {
-            return trendLocationService.name_weoid_map().get(NAME);
+    public Integer weoid(String name) {
+        if (trendLocationService.name_weoid_map().containsKey(name)) {
+            return trendLocationService.name_weoid_map().get(name);
         }
         return 0;
     }

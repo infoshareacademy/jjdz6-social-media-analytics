@@ -52,9 +52,9 @@ public class FindByTrendsServlet extends HttpServlet {
         String NAME = req.getParameter("NAME");
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
-            trends = twitter.getPlaceTrends(twitterTrendService.WEOID(NAME));
+            trends = twitter.getPlaceTrends(twitterTrendService.weoid(NAME));
             for (Trend trend : trends.getTrends()) {
-                trendList.add(new TrendDTO(trend.getName(), trend.getQuery(), trend.getURL()));
+
             }
             model.put("trendList", trendList);
             template.process(model, resp.getWriter());

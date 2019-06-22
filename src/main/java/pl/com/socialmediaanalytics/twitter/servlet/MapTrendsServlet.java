@@ -11,9 +11,12 @@ import freemarker.template.TemplateException;
 import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
 import pl.com.socialmediaanalytics.twitter.dto.TrendDTO;
+import pl.com.socialmediaanalytics.twitter.model.Coordinates;
+import pl.com.socialmediaanalytics.twitter.service.TrendMapService;
 import twitter4j.*;
 
 import javax.inject.Inject;
+import javax.persistence.OneToMany;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,37 +34,29 @@ public class MapTrendsServlet extends HttpServlet {
     @Inject
     TemplateProvider templateProvider;
 
+    @Inject
+    TrendMapService trendMapService;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GeoApiContext context = new GeoApiContext.Builder()
-                .apiKey("AIzaSyB7PCQggzOtF1cQbGw_Gfho06NLBApfvBA")
-                .build();
-        GeocodingResult[] results = new GeocodingResult[0];
-        try {
-            results = GeocodingApi.geocode(context,
-                    req.getParameter("place")).await();
-        } catch (ApiException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        System.out.println(gson.toJson(results[0].geometry.location));
 
-        Double lat = results[0].geometry.location.lat;
-        Double ln = results[0].geometry.location.lng;
+        String param =  req.getParameter("place");
+        Coordinates coordinates = trendMapService.getCoordinates(param);
+
+
         Map<String, Object> model = new HashMap<>();
         try {
             Twitter twitter = twitterInstance.getTwitterInstance();
-            ResponseList<Location> locations = twitter.getClosestTrends(new GeoLocation(lat, ln));
+            ResponseList<Location> locations = twitter.getClosestTrends(new GeoLocation(coordinates.getLat(), coordinates.getLn()));
             Location loc = locations.get(0);
             Trends trends = twitter.getPlaceTrends(loc.getWoeid());
             for (Trend trend : trends.getTrends()) {
+
                 TrendDTO td = new TrendDTO(trend.getName(), trend.getQuery(), trend.getURL());
-                model.put("lat", results[0].geometry.location.lat);
-                model.put("ln", results[0].geometry.location.lng);
+
+                model.put("coord", coordinates);
                 model.put("trends", td);
             }
         } catch (TwitterException e) {
