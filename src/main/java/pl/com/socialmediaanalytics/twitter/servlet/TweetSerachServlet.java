@@ -16,7 +16,7 @@ import java.util.List;
 
 @WebServlet("/tweet-search")
 
-public class TwitterSearchServlet extends HttpServlet {
+public class TweetSerachServlet extends HttpServlet {
 
     @Inject
     TwitterSearchService twitterSearchService;
@@ -33,7 +33,6 @@ public class TwitterSearchServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-
         List<String> tweetList = new ArrayList<>();
         try {
             tweetList = twitterSearchService.searchtweets("lang:" + textParam);

@@ -1,5 +1,6 @@
 package pl.com.socialmediaanalytics.twitter.service;
 
+import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
 import twitter4j.*;
 
 import javax.enterprise.context.RequestScoped;
@@ -12,10 +13,10 @@ import java.util.List;
 public class TwitterSearchService {
 
     @Inject
-    TwitterInstanceService twitterInstanceService;
+    TwitterInstance twitterInstance;
 
     public List<String> searchtweets(String userQuery) throws TwitterException {
-        Twitter twitter = twitterInstanceService.getTwitterInstance();
+        Twitter twitter = twitterInstance.getTwitterInstance();
         Query query = new Query(userQuery);
         QueryResult result = twitter.search(query);
 
