@@ -50,6 +50,15 @@ public class StreamMapTrendServlet extends HttpServlet {
         StatusListener listener = new StatusListener() {
             public void onStatus(Status status) {
 
+                Map<String, Object> model = new HashMap<>();
+                model.put("stream",status.getText());
+
+                try {
+                    Template template = templateProvider.getTemplate(getServletContext(),"coord.ftlh");
+                    template.process(model,resp.getWriter());
+                } catch (IOException | TemplateException e) {
+                    e.printStackTrace();
+                }
 
             }
             public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
@@ -82,11 +91,11 @@ public class StreamMapTrendServlet extends HttpServlet {
         twitterStream.sample();
 
 //
-//        FilterQuery filtro = new FilterQuery();
-//        double[][] bb= {{-180, -90}, {180, 90}};
-//        filtro.locations(bb);
-//        filtro.language(new String[]{"en"});
-//        twitterStream.filter(filtro);
+        FilterQuery filtro = new FilterQuery();
+        double[][] bb= {{-180, -90}, {180, 90}};
+        filtro.locations(bb);
+        filtro.language(new String[]{"en"});
+        twitterStream.filter(filtro);
 
 
 

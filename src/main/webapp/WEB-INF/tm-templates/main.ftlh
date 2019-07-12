@@ -2,9 +2,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="343502052313-psu5l3v39klko54udt2h4g93i5nmnb5u.apps.googleusercontent.com">
     <title>Social Meida Analytics</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <style>
         body {
             background: #3aabef;
@@ -82,12 +84,14 @@
 
 <body>
 
+
 <div id="menu-nav">
     <div id="navigation-bar">
         <ul>
             <li><a href="find-trend"><i class="fas fa-poll"></i><span>Trend</span></a></li>
             <li><a href="map-trends"><i class="fas fa-globe-americas"></i><span>Trend Map</span></a></li>
             <li><a href="search-user"><i class="fa fa-user"></i><span>Search User</span></a></li>
+            <li><a href="sign-in-out"><i class="fa fa-user"></i><span>Sign in</span></a></li>
         </ul>
     </div>
 
