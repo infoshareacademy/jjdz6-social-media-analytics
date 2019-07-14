@@ -7,7 +7,7 @@
     <data-source>
         <name>java:ds/smads</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-        <url>jdbc:mysql://db:3306//sma?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</url>
+        <url>jdbc:mysql://db/sma?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</url>
         <user>mysql</user>
         <password>pass123</password>
     </data-source>
