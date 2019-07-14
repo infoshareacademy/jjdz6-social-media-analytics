@@ -10,6 +10,9 @@ services:
       - DB_URI=db:3306
     depends_on:
       - db
+    links:
+      - db
+    dns: 8.8.8.8
     ports:
       - "8080:8080"
       - "9990:9990"
@@ -24,9 +27,9 @@ services:
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=pass123
       - MYSQL_ROOT_PASSWORD=root
-    volumes:
-      - ./db/init/:/docker-entrypoint-initdb.d/ # init database
-      - ./db/data/:/var/lib/mysql/              # data storage
+#    volumes:
+#      - ./db/init/:/docker-entrypoint-initdb.d/ # init database
+#      - ./db/data/:/var/lib/mysql/              # data storage
     ports:
       - "3306:3306"
 networks:
