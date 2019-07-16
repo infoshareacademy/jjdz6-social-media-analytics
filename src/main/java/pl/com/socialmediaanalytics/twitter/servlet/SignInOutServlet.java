@@ -24,7 +24,7 @@ public class SignInOutServlet extends HttpServlet {
 
 
 
-        Template template =  templateProvider.getTemplate(getServletContext(),"sign.ftlh");
+        Template template =  templateProvider.getTemplate(getServletContext(),"sign.jsp");
         Map<String,Object>model = new HashMap<>();
         model.put("name","Krzysztof");
 

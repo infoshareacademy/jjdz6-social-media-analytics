@@ -1,8 +1,11 @@
 package pl.com.socialmediaanalytics.twitter.servlet;
 
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
+
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import pl.com.socialmediaanalytics.twitter.service.IdTokenValidatorService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,46 +14,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-@WebServlet("/idTokenValid")
+@WebServlet("/login")
 public class IdTokenValidatorServlet extends HttpServlet {
+
+
     @Inject
-    TemplateProvider templateProvider;
+    IdTokenValidatorService idTokenValidatorService;
 
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String idToken = req.getParameter("idtoken");
-        Map<String, Object> model = new HashMap<>();
-        model.put("id", idToken);
-
-        Template template = templateProvider.getTemplate(getServletContext(), "token.ftlh");
-
-        try {
-            template.process(model, resp.getWriter());
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
-
-
-
-
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Object> model = new HashMap<>();
-        model.put("id",null);
 
-        Template template = templateProvider.getTemplate(getServletContext(), "token.ftlh");
+        String idtoken = req.getParameter("id_token");
 
-        try {
-            template.process(model, resp.getWriter());
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
+        resp.getWriter().print(idtoken);
+
+//        try {
+//            idTokenValidatorService.getPayload(idtoken);
+//            System.out.println(idtoken.toString());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
     }
+
+
+
+
 }
