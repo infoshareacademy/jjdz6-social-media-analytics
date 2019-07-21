@@ -19,17 +19,16 @@ import java.util.Map;
 public class SignInOutServlet extends HttpServlet {
     @Inject
     TemplateProvider templateProvider;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-
-        Template template =  templateProvider.getTemplate(getServletContext(),"sign.jsp");
-        Map<String,Object>model = new HashMap<>();
-        model.put("name","Krzysztof");
+        Template template = templateProvider.getTemplate(getServletContext(), "sign.ftlh");
+        Map<String, Object> model = new HashMap<>();
+        model.put("name", "Krzysztof");
 
         try {
-            template.process(model,resp.getWriter());
+            template.process(model, resp.getWriter());
         } catch (TemplateException e) {
             e.printStackTrace();
         }
