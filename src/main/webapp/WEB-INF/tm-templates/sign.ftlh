@@ -9,15 +9,18 @@
 <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 <script>
     function onSignIn(googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
 
-            var profile = googleUser.getBasicProfile();
-            var redirectUrl = "${pageContext.request.contextPath}/login"; //nullpointer exception
-            var form = $('<form action="' + redirectUrl + '" method="get">' +
-                '<input type="text" name="id_token" value="' + googleUser.getAuthResponse().id_token + '" />' + '</form>');
-        $('body').append(form);
-        form.submit();
 
-    }
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://localhost:8080/sign-in-out');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            console.log('Signed in as: ' + xhr.responseText);
+        };
+        xhr.send('idtoken=' + id_token);
+    };
+
 </script>
 </body>
 </html>
