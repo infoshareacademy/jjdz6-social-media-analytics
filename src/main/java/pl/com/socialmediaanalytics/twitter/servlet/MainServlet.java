@@ -25,6 +25,12 @@ public class MainServlet extends HttpServlet {
         Map<String, Object> model = new HashMap<>();
         model.put("main", null);
 
+        String googleUserName = (String) req.getSession().getAttribute("google_name");
+        String email = (String) req.getSession().getAttribute("email");
+        model.put("google_name", googleUserName);
+
+
+
         Template template = templateProvider.getTemplate(getServletContext(), "main.ftlh");
         try {
             template.process(model, resp.getWriter());

@@ -83,6 +83,11 @@
 </head>
 
 <body>
+<div class="container">
+    <#if google_name??>
+    <h3 class="heading-statistics">Zalogowany jako: ${google_name}</h3>
+    </#if>
+</div>
 
 
 <div id="menu-nav">

@@ -16,11 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Logger;
 
 @WebServlet("/map-trends")
 
 public class MapTrendsServlet extends HttpServlet {
 
+     private Logger logger;
     @Inject
     TemplateProvider templateProvider;
 
@@ -31,11 +33,16 @@ public class MapTrendsServlet extends HttpServlet {
     TrendMapService trendMapService;
 
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
         String param =  req.getParameter("place");
+        if (param != null){
+            logger.info("Param place is null");
+        }
+
         TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(param);
         Coordinates coordinates = trendMapService.getCoordinates(param);
 
@@ -57,6 +64,7 @@ public class MapTrendsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Map<String, Object> model = new HashMap<>();
+
         model.put("lat",new Object());
         model.put("ln",new Object());
         model.put("trends",new Object());
