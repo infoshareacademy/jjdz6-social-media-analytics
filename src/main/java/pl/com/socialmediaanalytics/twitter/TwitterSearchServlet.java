@@ -39,6 +39,9 @@ public class TwitterSearchServlet extends HttpServlet {
         String optionParam = req.getParameter("option");
         String textParam = req.getParameter("text");
         PrintWriter writer = resp.getWriter();
+        String ip = req.getRemoteAddr();
+        System.out.println(ip);
+
 
         Map<String, Object> model = new HashMap<>();
         Template template = templateProvider.getTemplate(getServletContext(), "tweet-list.ftlh");
@@ -46,27 +49,26 @@ public class TwitterSearchServlet extends HttpServlet {
         List<Status> statuses = new ArrayList<>();
 
         try {
-
-//            if((optionParam != null && !optionParam.isEmpty()) && (textParam != null && !textParam.isEmpty())) {
-               if(optionParam == "lang") {
-                  statuses = twitterSearchService.searchtweets("lang:" + "pl");
-//               } else if(optionParam == "text") {
-//                statuses = twitterSearchService.searchtweets("text:" + textParam);
-//               } else if(optionParam == "city") {
-//                    statuses = twitterSearchService.searchtweets("city:" + textParam);
-//               }else if (optionParam == "country") {
-//                    statuses = twitterSearchService.searchtweets("country:" + textParam);
-//               }
-//            } else {
-//                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//                return;
-            }
-        } catch (TwitterException e) {
+            if((optionParam != null && !optionParam.isEmpty()) && (textParam != null && !textParam.isEmpty())) {
+               if(optionParam.equals("lang")){
+                  statuses = twitterSearchService.searchTweets("lang:" + "pl");
+               } else if(optionParam.equals("text")) {
+                statuses = twitterSearchService.searchTweetsByDate(textParam, "2019-08-14");
+               } else if(optionParam.equals("city"))
+                    statuses = twitterSearchService.searchTweets("city:" + textParam);
+               }else if (optionParam.equals("country")) {
+                    statuses = twitterSearchService.searchTweets("country:" + textParam);
+               } else {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+               }
+            } catch (TwitterException e) {
             e.printStackTrace();
         }
 
         List<TweetPresentationObject> tweets = new ArrayList<>();
 
+        System.out.println(statuses.size());
         for (Status status : statuses) {
             List<String> mediaURLList = new ArrayList<>();
             List<String> hashtagList = new ArrayList<>();
