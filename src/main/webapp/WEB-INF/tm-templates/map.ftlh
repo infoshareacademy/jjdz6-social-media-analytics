@@ -23,6 +23,7 @@
             background-position: 10px 10px;
             background-repeat: no-repeat;
             padding-left: 40px;
+
         }
 
         #content a {
@@ -79,9 +80,20 @@
             /* The max width of the info window. */
             width: 200px;
         }
+
+        .main-menu {
+            text-align: center;
+            position: absolute;
+            right: 200px;
+            text-decoration: none;
+            text-underline: none;
+
+        }
     </style>
 </head>
 <body>
+
+<div class="main-menu"><a href="/main">Main Menu</a></div>
 
 <div class="form">
     <form method="post" action="map-trends">
@@ -89,6 +101,9 @@
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
 </div>
+
+
+
 
 <div id="map"></div>
 

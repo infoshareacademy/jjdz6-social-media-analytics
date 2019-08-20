@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background: #3aabef;
             font: normal 300 18px "Roboto", sans-serif;
@@ -73,16 +79,18 @@
         }
 
         .footer {
+            display: block;
+            margin: 0 auto;
             background-color: #FFF;
             position: fixed;
             bottom: 0;
-            width: auto;
+            width: 75%;
             text-align: center;
             color: black;
         }
 
         .google-name {
-           text-align: center;
+            text-align: center;
 
         }
     </style>
@@ -99,12 +107,10 @@
 
             <#if name??>
                 <li class="nav-item">
-                    <a
-                       href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/logout">Wyloguj</a>
+                    <a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/logout">Wyloguj</a>
                 </li>
             <#else>
-                <li>
-                    <a  href="http://localhost:8080/googlelogin">Zaloguj</a>
+                <li><a href="http://localhost:8080/googlelogin">Zaloguj</a>
                 </li>
             </#if>
 

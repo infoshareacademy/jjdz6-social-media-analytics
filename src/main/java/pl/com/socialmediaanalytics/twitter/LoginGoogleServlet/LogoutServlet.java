@@ -25,7 +25,7 @@ public class LogoutServlet extends HttpServlet {
 
         resp.setCharacterEncoding("UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "logout.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "firstpage.ftlh");
         Map<String, Object> model = new HashMap<>();
 
         try {

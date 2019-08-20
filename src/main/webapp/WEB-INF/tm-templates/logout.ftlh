@@ -18,10 +18,19 @@
             color: #e74c3c;
 
         }
+
+        .main-menu {
+            text-align: center;
+            position: absolute;
+            right: 200px;
+            text-decoration: none;
+            text-underline: none;
+
+        }
     </style>
 </head>
 <body>
-
 <h1>Zostałeś poprawnie wylogowany</h1>
+<div class="main-menu"><a href="/main">Main Menu</a></div>
 </body>
 </html>

@@ -70,6 +70,15 @@
 
         }
 
+        .main-menu {
+            text-align: center;
+            position: absolute;
+            right: 200px;
+            text-decoration: none;
+            text-underline: none;
+
+        }
+
     </style>
 </head>
 <body>
@@ -83,6 +92,7 @@
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
 </div>
+<div class="main-menu"><a href="/main">Main Menu</a></div>
 
 <h2>#List Of Trends</h2>
 
