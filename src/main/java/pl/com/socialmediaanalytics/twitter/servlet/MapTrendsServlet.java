@@ -22,13 +22,13 @@ import java.util.*;
 public class MapTrendsServlet extends HttpServlet {
 
     @Inject
-    TemplateProvider templateProvider;
+  private   TemplateProvider templateProvider;
 
     @Inject
-    TrendTDOService trendTDOService;
+   private TrendTDOService trendTDOService;
 
     @Inject
-    TrendMapService trendMapService;
+   private TrendMapService trendMapService;
 
 
     @Override
