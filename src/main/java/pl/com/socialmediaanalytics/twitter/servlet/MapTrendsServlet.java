@@ -35,13 +35,21 @@ public class MapTrendsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        String param =  req.getParameter("place");
+        final String param = req.getParameter("param");
+
+        if (param == null || param.isEmpty()) {
+            resp.getWriter().write("Empty action parameter.");
+            return;
+        }
+
+
         TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(param);
         Coordinates coordinates = trendMapService.getCoordinates(param);
 
+
         Map<String, Object> model = new HashMap<>();
-        model.put("trends",dt);
-        model.put("coord",coordinates);
+        model.put("trends", dt);
+        model.put("coord", coordinates);
 
 
         Template template = templateProvider.getTemplate(getServletContext(), "map.ftlh");
@@ -50,16 +58,18 @@ public class MapTrendsServlet extends HttpServlet {
         } catch (TemplateException te) {
             te.printStackTrace();
         }
-
     }
+
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Map<String, Object> model = new HashMap<>();
-        model.put("lat",new Object());
-        model.put("ln",new Object());
-        model.put("trends",new Object());
+        model.put("lat", new Object());
+        model.put("ln", new Object());
+        model.put("trends", new Object());
         Template template = templateProvider.getTemplate(getServletContext(), "map.ftlh");
         try {
             template.process(model, resp.getWriter());

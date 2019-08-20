@@ -17,7 +17,11 @@
 
         }
 
-        a { display: block;
+        a {
+
+            margin-bottom: 50px;
+            margin-top: 50px;
+            display: block;
             text-align: center;
             text-transform: uppercase;
             text-decoration: none;
@@ -26,12 +30,14 @@
         }
 
 
+
+
     </style>
 </head>
 <body>
 
-<a href="http://localhost:8080/googlelogin">Zaloguj</a>
-<a href="main">Start Bez Logowania</a>
+<a class="login" href="http://localhost:8080/googlelogin">Zaloguj</a>
+<a class="logout" href="main">Start Bez Logowania</a>
 
 
 </body>
