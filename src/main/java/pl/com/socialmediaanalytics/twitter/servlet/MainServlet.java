@@ -26,9 +26,9 @@ public class MainServlet extends HttpServlet {
         model.put("main", null);
 
 
-        String googleUserName = (String) req.getSession().getAttribute("google_name");
+        String googleUserName = (String) req.getSession().getAttribute("name");
         String email = (String) req.getSession().getAttribute("email");
-        model.put("google_name", googleUserName);
+        model.put("name", googleUserName);
 
         Template template = templateProvider.getTemplate(getServletContext(), "main.ftlh");
         try {

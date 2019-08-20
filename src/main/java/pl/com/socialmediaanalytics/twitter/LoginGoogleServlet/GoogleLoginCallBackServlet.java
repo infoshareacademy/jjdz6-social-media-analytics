@@ -51,7 +51,7 @@ public class GoogleLoginCallBackServlet extends AbstractAuthorizationCodeCallbac
         Userinfoplus info = oauth2.userinfo().get().execute();
         String name = info.getName();
         String email = info.getEmail();
-        req.getSession().setAttribute("google_name", name);
+        req.getSession().setAttribute("name", name);
         req.getSession().setAttribute("email", email);
         resp.sendRedirect("/main");
     }

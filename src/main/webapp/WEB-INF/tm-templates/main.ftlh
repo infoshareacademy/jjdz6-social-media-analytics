@@ -1,5 +1,5 @@
-<html>
-
+<!doctype html>
+<html lang="pl-PL">
 <head>
     <meta charset="UTF-8">
     <meta name="google-signin-client_id"
@@ -76,17 +76,19 @@
             background-color: #FFF;
             position: fixed;
             bottom: 0;
-            width: 100%;
+            width: auto;
             text-align: center;
             color: black;
+        }
+
+        .google-name {
+           text-align: center;
+
         }
     </style>
 </head>
 
 <body>
-
-
-
 
 <div id="menu-nav">
     <div id="navigation-bar">
@@ -94,13 +96,24 @@
             <li><a href="find-trend"><i class="fas fa-poll"></i><span>Trend</span></a></li>
             <li><a href="map-trends"><i class="fas fa-globe-americas"></i><span>Trend Map</span></a></li>
             <li><a href="search-user"><i class="fa fa-user"></i><span>Search User</span></a></li>
-            <li>
-                <a class="nav-link w3-hover-green" href="http://localhost:8080/googlelogin">Zaloguj</a>
-            </li>
+
+            <#if name??>
+                <li class="nav-item">
+                    <a
+                       href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/logout">Wyloguj</a>
+                </li>
+            <#else>
+                <li>
+                    <a  href="http://localhost:8080/googlelogin">Zaloguj</a>
+                </li>
+            </#if>
+
+
         </ul>
     </div>
 
 </div>
+<div class="google-name">Zalogowany jako: ${name}</div>
 
 </body>
 <div class="footer">
