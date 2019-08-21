@@ -45,7 +45,7 @@ public class FindByCityServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final String param = req.getParameter("param");
+        final String param = (String)req.getSession().getAttribute("param");
 
         if (param == null || param.isEmpty() ) {
             resp.getWriter().write("Empty action parameter.");
