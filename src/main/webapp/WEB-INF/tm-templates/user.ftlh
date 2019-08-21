@@ -88,7 +88,7 @@
 <img src="http://aux4.iconspalace.com/uploads/7425575651630862538.0-twitter-256"/>
 <div class="form">
     <form method="post" action="search-user">
-        #Twitter User: <input type="text" name="user"/><br/><br/>
+        #Twitter User: <input type="text" name="name"/><br/><br/>
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
 </div>

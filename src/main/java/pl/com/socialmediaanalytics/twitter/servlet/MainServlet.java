@@ -25,16 +25,14 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
 
+
+
         Map<String, Object> model = new HashMap<>();
         model.put("main", null);
 
         String googleUserName = (String) req.getSession().getAttribute("name");
-        String email = (String) req.getSession().getAttribute("email");
         model.put("name", googleUserName);
 
-        Cookie cookie = new Cookie("name",googleUserName);
-        cookie.setMaxAge(120);
-        resp.addCookie(cookie);
 
         Template template = templateProvider.getTemplate(getServletContext(), "main.ftlh");
         try {
@@ -43,4 +41,5 @@ public class MainServlet extends HttpServlet {
             te.printStackTrace();
         }
     }
+
 }

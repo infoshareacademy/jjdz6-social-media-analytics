@@ -12,6 +12,7 @@ import twitter4j.*;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,16 +44,15 @@ public class FindByCityServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String action = req.getParameter("action");
 
-        if (action == null || action.isEmpty() ) {
+        final String param = req.getParameter("param");
+
+        if (param == null || param.isEmpty() ) {
             resp.getWriter().write("Empty action parameter.");
             return;
         }
 
-        if (action.equals("name")) {
-
-            List<TrendDTO> trendDTOList = findByCityService.trendList(action);
+            List<TrendDTO> trendDTOList = findByCityService.trendList(param);
             Map<String, List<TrendDTO>> model = new HashMap<>();
             model.put("trendList", trendDTOList);
 
@@ -65,4 +65,3 @@ public class FindByCityServlet extends HttpServlet {
             }
         }
     }
-}

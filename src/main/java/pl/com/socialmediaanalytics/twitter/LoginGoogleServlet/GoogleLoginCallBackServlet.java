@@ -12,6 +12,7 @@ import com.google.api.services.oauth2.model.Userinfoplus;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -51,8 +52,12 @@ public class GoogleLoginCallBackServlet extends AbstractAuthorizationCodeCallbac
         Userinfoplus info = oauth2.userinfo().get().execute();
         String name = info.getName();
         String email = info.getEmail();
+        Cookie cookie = new Cookie("name", name);
         req.getSession().setAttribute("name", name);
         req.getSession().setAttribute("email", email);
         resp.sendRedirect("/main");
+        resp.addCookie(cookie);
+
+
     }
 }

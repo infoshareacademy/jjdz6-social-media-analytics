@@ -88,7 +88,7 @@
 <h1>#Twitter Trends by Country/City</h1>
 <div class="form">
     <form method="post" action="find-trend">
-        Country/City: <input type="text" name="name"/><br/><br/>
+        Country/City: <input type="text" name="param"/><br/><br/>
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
 </div>

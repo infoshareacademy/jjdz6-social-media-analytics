@@ -11,6 +11,7 @@ import pl.com.socialmediaanalytics.twitter.service.TrendTDOService;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,17 +36,10 @@ public class MapTrendsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        final String param = req.getParameter("param");
+        final String place = req.getParameter("place");
 
-        if (param == null || param.isEmpty()) {
-            resp.getWriter().write("Empty action parameter.");
-            return;
-        }
-
-
-        TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(param);
-        Coordinates coordinates = trendMapService.getCoordinates(param);
-
+        TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(place);
+        Coordinates coordinates = trendMapService.getCoordinates(place);
 
         Map<String, Object> model = new HashMap<>();
         model.put("trends", dt);

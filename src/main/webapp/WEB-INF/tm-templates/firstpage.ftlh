@@ -9,6 +9,8 @@
 
     <style>
 
+      
+
         * {
             margin: 0;
             padding: 0;
@@ -17,10 +19,14 @@
 
         }
 
+
+
         a {
 
             margin-bottom: 50px;
             margin-top: 50px;
+            padding: 40px 40px;
+            font-family: Arial,sans-serif;
             display: block;
             text-align: center;
             text-transform: uppercase;
@@ -30,6 +36,11 @@
         }
 
 
+      img {
+          display: block;
+          margin: 0 auto;
+      }
+
 
 
     </style>
@@ -38,6 +49,10 @@
 
 <a class="login" href="http://localhost:8080/googlelogin">Zaloguj</a>
 <a class="logout" href="main">Start Bez Logowania</a>
+
+<img src="https://thumbor.sd-cdn.fr/wtvqeXqkR0A7PMZrUt3h9Q9_DDU=/770x515/cdn.sd-cdn.fr/wp-content/uploads/2019/03/Twitter-logo-illustration.jpg" alt="">
+
+
 
 
 </body>

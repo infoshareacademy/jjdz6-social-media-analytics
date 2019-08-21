@@ -104,6 +104,7 @@
             <li><a href="find-trend"><i class="fas fa-poll"></i><span>Trend</span></a></li>
             <li><a href="map-trends"><i class="fas fa-globe-americas"></i><span>Trend Map</span></a></li>
             <li><a href="search-user"><i class="fa fa-user"></i><span>Search User</span></a></li>
+            <li><a href="cookie-reader"><i class="fa fa-user"></i><span>Cookie-reader</span></a></li>
 
             <#if name??>
                 <li class="nav-item">
