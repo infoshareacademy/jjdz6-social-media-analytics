@@ -34,6 +34,7 @@ public class SearchUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        final String nameOfUser = req.getParameter("name");
         Cookie cookie = new Cookie("find-by-user",nameOfUser);
+        cookie.setMaxAge(60);
         resp.addCookie(cookie);
 
        if ( nameOfUser == null|| nameOfUser.isEmpty() ) {

@@ -25,7 +25,7 @@ public class SearchUserService {
             if (user!= null && !user.equals("")) {
                 ResponseList<User> users = twitter.searchUsers(user, 1);
                 for (User u : users) {
-                    statusList.add(new UserDTO(u.getName(), u.getStatus().getText(), u.getMiniProfileImageURL()));
+                    statusList.add(new UserDTO(u.getName(), u.getStatus().getText(), u.getMiniProfileImageURL(),u.getFollowersCount()));
                 }
             }
         } catch (

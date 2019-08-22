@@ -27,10 +27,14 @@ public class CookieFilter implements Filter {
 
 
         Cookie cookieUserGoogleName = new Cookie("google-user-name", googleUserGoogleName);
+
         cookieUserGoogleName.setMaxAge(60);
+
         response.addCookie(cookieUserGoogleName);
 
+
         request.setAttribute("google-user-name", googleUserGoogleName);
+
 
         filterChain.doFilter(servletRequest, servletResponse);
 

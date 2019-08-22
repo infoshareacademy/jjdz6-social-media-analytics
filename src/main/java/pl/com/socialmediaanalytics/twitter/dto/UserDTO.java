@@ -5,11 +5,21 @@ public class UserDTO {
     private String name;
     private String status;
     private String imageURL;
+    private Integer followers;
 
-    public UserDTO(String name, String status, String imageURL) {
+    public Integer getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Integer followers) {
+        this.followers = followers;
+    }
+
+    public UserDTO(String name, String status, String imageURL, Integer followers) {
         this.name = name;
         this.status = status;
         this.imageURL = imageURL;
+        this.followers= followers;
     }
 
     public String getName() {

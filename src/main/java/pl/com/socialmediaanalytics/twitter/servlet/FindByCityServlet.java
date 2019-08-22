@@ -47,6 +47,7 @@ public class FindByCityServlet extends HttpServlet {
 
         final String param = req.getParameter("param");
         Cookie cookie = new Cookie("find-by-city",param);
+        cookie.setMaxAge(60);
         resp.addCookie(cookie);
 
         if (param == null || param.isEmpty() ) {
