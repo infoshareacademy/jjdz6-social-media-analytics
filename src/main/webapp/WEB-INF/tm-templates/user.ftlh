@@ -97,7 +97,7 @@
 <#list users as user>
     <li class="nameUser">${user.name}</li>
     <li>${user.status}</li>
-    <li><img src="${user.imageURL}" alt="dsdsdsd"></li>
+    <li><img src="${user.imageURL}" alt="image of user"></li>
 </#list>
 
 

@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 
 @WebFilter(
         filterName = "CookieFilter",
-        urlPatterns = {"/search-user","/map-trends","/find-trend","/main"}
+        urlPatterns = "/*"
 )
 public class CookieFilter implements Filter {
     @Override
@@ -34,10 +34,10 @@ public class CookieFilter implements Filter {
         Cookie cookiePlace= new Cookie("find-trend-place", param);
         Cookie cookieUserName = new Cookie("google-user-name",googleUserName);
 
-        cookieUser.setMaxAge(60);
-        cookieTrend.setMaxAge(60);
-        cookiePlace.setMaxAge(60);
-        cookieUserName.setMaxAge(60);
+        cookieUser.setMaxAge(0);
+        cookieTrend.setMaxAge(0);
+        cookiePlace.setMaxAge(0);
+        cookieUserName.setMaxAge(0);
 
         response.addCookie(cookieUser);
         response.addCookie(cookieTrend);

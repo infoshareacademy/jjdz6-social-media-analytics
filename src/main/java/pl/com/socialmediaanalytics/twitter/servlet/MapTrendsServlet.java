@@ -37,6 +37,8 @@ public class MapTrendsServlet extends HttpServlet {
 
 
         final String place = req.getParameter("place");
+        Cookie cookie = new Cookie("find-by-map",place);
+        resp.addCookie(cookie);
 
 
         TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(place);

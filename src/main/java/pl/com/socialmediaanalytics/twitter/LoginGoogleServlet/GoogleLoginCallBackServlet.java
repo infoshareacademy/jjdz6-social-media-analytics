@@ -16,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.UUID;
 
 @WebServlet("/oauth2callback")
@@ -55,6 +56,8 @@ public class GoogleLoginCallBackServlet extends AbstractAuthorizationCodeCallbac
         req.getSession().setAttribute("name", name);
         req.getSession().setAttribute("email", email);
         resp.sendRedirect("/main");
+
+
 
 
 

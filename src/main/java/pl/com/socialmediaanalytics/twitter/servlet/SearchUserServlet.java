@@ -25,14 +25,19 @@ import java.util.*;
 @WebServlet("/search-user")
 public class SearchUserServlet extends HttpServlet {
     @Inject
-   private TemplateProvider templateProvider;
+    private TemplateProvider templateProvider;
 
     @Inject
-   private SearchUserService searchUserService;
+    private SearchUserService searchUserService;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
+       final String name = req.getParameter("name");
+
+       if ( name == null|| name.isEmpty() ) {
+           resp.getWriter().print("User doesn't exist ");
+         return;
+       }
         List<UserDTO> statusList = searchUserService.userDTOList(name);
         Map<String, List<UserDTO>> model = new HashMap<>();
 
