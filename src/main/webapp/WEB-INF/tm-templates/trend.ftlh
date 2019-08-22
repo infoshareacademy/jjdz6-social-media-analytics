@@ -85,7 +85,6 @@
 <div class="image">
     <img src="https://spur.innovware.net/wp-content/uploads/2017/04/PairOfButtocks-Uganda-Twitter-Trending-Spur-Magazine-1.jpg"/>
 </div>
-<h1>#Twitter Trends by Country/City</h1>
 <div class="form">
     <form method="post" action="find-trend">
         Country/City: <input type="text" name="param"/><br/><br/>
@@ -94,7 +93,7 @@
 </div>
 <div class="main-menu"><a href="/main">Main Menu</a></div>
 
-<h2>#List Of Trends</h2>
+<h2>Trends: </h2>
 
 <#list trendList as trend>
     <ol><a href="${trend.URL}">${trend.name}</a></ol>
