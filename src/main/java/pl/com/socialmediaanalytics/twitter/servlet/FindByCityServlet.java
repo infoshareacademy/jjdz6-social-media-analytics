@@ -31,7 +31,7 @@ public class FindByCityServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        resp.setCharacterEncoding("UTF-8");
         Map<String, List<String>> dateModel = new HashMap<>();
         dateModel.put("trendList", Collections.emptyList());
         Template template = templateProvider.getTemplate(getServletContext(), "trend.ftlh");

@@ -51,6 +51,8 @@ public class SearchUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.setCharacterEncoding("UTF-8");
         Map<String, List<String>> model = new HashMap<>();
         model.put("users", Collections.emptyList());
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");

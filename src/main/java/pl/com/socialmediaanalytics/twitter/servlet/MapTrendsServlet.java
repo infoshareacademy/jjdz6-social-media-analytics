@@ -38,6 +38,7 @@ public class MapTrendsServlet extends HttpServlet {
 
         final String place = req.getParameter("place");
 
+
         TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(place);
         Coordinates coordinates = trendMapService.getCoordinates(place);
 
@@ -59,7 +60,7 @@ public class MapTrendsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        resp.setCharacterEncoding("UTF-8");
         Map<String, Object> model = new HashMap<>();
         model.put("lat", new Object());
         model.put("ln", new Object());
