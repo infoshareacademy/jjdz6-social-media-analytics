@@ -84,13 +84,18 @@
             background-color: #FFF;
             position: fixed;
             bottom: 0;
-            width: 75%;
+            width: 100%;
             text-align: center;
-            color: black;
+            color: #848484;
         }
 
         .google-name {
+            margin: 0 auto;
             text-align: center;
+            padding: 20px 20px;
+            width: 500px;
+            background-color:white;
+            color:#848484;
 
         }
     </style>
