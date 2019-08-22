@@ -5,11 +5,11 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.regex.Matcher;
+
 
 @WebFilter(
         filterName = "CookieFilter",
-        urlPatterns = "/*"
+        urlPatterns = {"/main"}
 )
 public class CookieFilter implements Filter {
     @Override
@@ -23,33 +23,14 @@ public class CookieFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-
-        String name = request.getParameter("name");
-        String place = request.getParameter("place");
-        String param = (String)request.getSession().getAttribute("param");
-        String googleUserName = (String) request.getSession().getAttribute("name");
-
-        Cookie cookieUser = new Cookie("find-user", name);
-        Cookie cookieTrend= new Cookie("find-trend", place);
-        Cookie cookiePlace= new Cookie("find-trend-place", param);
-        Cookie cookieUserName = new Cookie("google-user-name",googleUserName);
-
-        cookieUser.setMaxAge(0);
-        cookieTrend.setMaxAge(0);
-        cookiePlace.setMaxAge(0);
-        cookieUserName.setMaxAge(0);
-
-        response.addCookie(cookieUser);
-        response.addCookie(cookieTrend);
-        response.addCookie(cookiePlace);
-        response.addCookie(cookieUserName);
-
-        request.setAttribute("find-user",name);
-        request.setAttribute("find-trend-map",place);
-        request.setAttribute("find-trend-place",param);
-        request.setAttribute("google-user-name",googleUserName);
+        String googleUserGoogleName = (String) request.getSession().getAttribute("name");
 
 
+        Cookie cookieUserGoogleName = new Cookie("google-user-name", googleUserGoogleName);
+        cookieUserGoogleName.setMaxAge(60);
+        response.addCookie(cookieUserGoogleName);
+
+        request.setAttribute("google-user-name", googleUserGoogleName);
 
         filterChain.doFilter(servletRequest, servletResponse);
 

@@ -21,7 +21,7 @@ public class CookieReader extends HttpServlet {
         cookies = req.getCookies();
 
         // Set response content type
-        resp.setContentType("text/html");
+        resp.setContentType("text/html;charset=UTF-8");
 
         PrintWriter out = resp.getWriter();
         String title = "Reading Cookies Example";
@@ -39,9 +39,10 @@ public class CookieReader extends HttpServlet {
 
             for (Cookie cookie1 : cookies) {
                 cookie = cookie1;
+                cookie1.setMaxAge(40);
                 out.print("Name : " + cookie.getName() + ",  ");
                 out.print("Value: " + cookie.getValue() + " <br/>");
-                out.print("Age" + cookie.getMaxAge());
+                out.print("Age: " + cookie.getMaxAge()+"");
             }
         } else {
             out.println("<h2>No cookies founds</h2>");

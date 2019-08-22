@@ -32,13 +32,15 @@ public class SearchUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       final String name = req.getParameter("name");
+       final String nameOfUser = req.getParameter("name");
+        Cookie cookie = new Cookie("find-by-user",nameOfUser);
+        resp.addCookie(cookie);
 
-       if ( name == null|| name.isEmpty() ) {
+       if ( nameOfUser == null|| nameOfUser.isEmpty() ) {
            resp.getWriter().print("User doesn't exist ");
          return;
        }
-        List<UserDTO> statusList = searchUserService.userDTOList(name);
+        List<UserDTO> statusList = searchUserService.userDTOList(nameOfUser);
         Map<String, List<UserDTO>> model = new HashMap<>();
 
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
