@@ -1,6 +1,9 @@
 package pl.com.socialmediaanalytics.twitter.filter;
 
 
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
@@ -23,8 +26,8 @@ public class CookieFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+        
         String googleUserGoogleName = (String) request.getSession().getAttribute("name");
-
 
         Cookie cookieUserGoogleName = new Cookie("google-user-name", googleUserGoogleName);
 
@@ -32,9 +35,7 @@ public class CookieFilter implements Filter {
 
         response.addCookie(cookieUserGoogleName);
 
-
         request.setAttribute("google-user-name", googleUserGoogleName);
-
 
         filterChain.doFilter(servletRequest, servletResponse);
 

@@ -9,18 +9,17 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.oauth2.Oauth2;
 import com.google.api.services.oauth2.model.Userinfoplus;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.UUID;
 
 @WebServlet("/oauth2callback")
 public class GoogleLoginCallBackServlet extends AbstractAuthorizationCodeCallbackServlet {
+
+
     @Override
     protected AuthorizationCodeFlow initializeFlow() throws ServletException, IOException {
         return GoogleLoginCommons.buildFlow();
@@ -50,9 +49,12 @@ public class GoogleLoginCallBackServlet extends AbstractAuthorizationCodeCallbac
                 gCredential)
                 .setApplicationName("Social Media Analytics")
                 .build();
+
+
         Userinfoplus info = oauth2.userinfo().get().execute();
         String name = info.getName();
         String email = info.getEmail();
+
         req.getSession().setAttribute("name", name);
         req.getSession().setAttribute("email", email);
         resp.sendRedirect("/main");
@@ -62,4 +64,7 @@ public class GoogleLoginCallBackServlet extends AbstractAuthorizationCodeCallbac
 
 
     }
+
+
+
 }

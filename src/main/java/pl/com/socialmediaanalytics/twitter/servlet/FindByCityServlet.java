@@ -44,7 +44,6 @@ public class FindByCityServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         final String param = req.getParameter("param");
         Cookie cookie = new Cookie("find-by-city",param);
         cookie.setMaxAge(60);
