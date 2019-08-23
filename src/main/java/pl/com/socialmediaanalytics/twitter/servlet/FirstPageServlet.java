@@ -22,9 +22,7 @@ public class FirstPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         resp.setCharacterEncoding("UTF-8");
-
         Template template = templateProvider.getTemplate(getServletContext(), "firstpage.ftlh");
         Map<String, Object> model = new HashMap<>();
         String googleUserName = (String) req.getSession().getAttribute("name");

@@ -23,14 +23,9 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         Map<String, Object> model = new HashMap<>();
-        model.put("main", null);
-
         String googleUserName = (String) req.getSession().getAttribute("name");
         model.put("name", googleUserName);
-
 
         Template template = templateProvider.getTemplate(getServletContext(), "main.ftlh");
         try {

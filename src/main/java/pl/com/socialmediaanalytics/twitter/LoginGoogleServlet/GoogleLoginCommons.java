@@ -13,6 +13,13 @@ public class GoogleLoginCommons {
 
     private static final List<String> scopes = new ArrayList<>();
 
+    private static final String CLIENT_ID = "343502052313-vk4bvpo1f72q6b0sh1hemqt5u7lt1fdg.apps.googleusercontent.com";
+
+    private static final String SECRET = "FYnUuinvDzknWrty05mXLt7o";
+
+    private static final String REDICTET_URL = "/oauth2callback";
+
+
     public static List<String> listScopes() {
         scopes.add("openid");
         scopes.add("email");
@@ -20,16 +27,11 @@ public class GoogleLoginCommons {
         return scopes;
     }
 
-    private static final String clientId = "343502052313-vk4bvpo1f72q6b0sh1hemqt5u7lt1fdg.apps.googleusercontent.com";
-
-    private static final String secret = "FYnUuinvDzknWrty05mXLt7o";
-
-    private static final String redirectUrl = "/oauth2callback";
 
 
     public static String buildRedirectUri(HttpServletRequest req) {
         GenericUrl url = new GenericUrl(req.getRequestURL().toString());
-        url.setRawPath(redirectUrl);
+        url.setRawPath(REDICTET_URL);
         return url.build();
     }
 
@@ -37,8 +39,8 @@ public class GoogleLoginCommons {
         return new GoogleAuthorizationCodeFlow.Builder(
                 new NetHttpTransport(),
                 JacksonFactory.getDefaultInstance(),
-                clientId,
-                secret,
+                CLIENT_ID,
+                SECRET,
                 listScopes()
         )
 

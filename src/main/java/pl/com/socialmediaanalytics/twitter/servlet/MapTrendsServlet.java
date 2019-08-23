@@ -35,12 +35,10 @@ public class MapTrendsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         final String place = req.getParameter("place");
         Cookie cookie = new Cookie("find-by-map",place);
         cookie.setMaxAge(60);
         resp.addCookie(cookie);
-
 
         TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(place);
         Coordinates coordinates = trendMapService.getCoordinates(place);
