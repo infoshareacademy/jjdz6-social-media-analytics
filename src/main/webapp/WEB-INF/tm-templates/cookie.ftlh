@@ -1,20 +1,14 @@
-
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta lang="pl">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test Web</title>
+    <title>Cookie</title>
 </head>
 <body>
-
-
-
-${stream}
-
-
-
-
+<#list cookies as cookie >
+    <ul> <li>${cookie}</li></ul>
+</#list>
 </body>
 </html>
