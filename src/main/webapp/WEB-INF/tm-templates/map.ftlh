@@ -20,7 +20,6 @@
         }
 
 
-
         .form {
             margin: 0;
             position: absolute;
@@ -33,11 +32,6 @@
 
         }
 
-        #content a {
-            font-size: 25px;
-            text-decoration: none;
-            color: #e74c3c;
-        }
 
         /* The popup bubble styling. */
         .popup-bubble {
@@ -99,10 +93,21 @@
             text-underline: none;
 
         }
+
+
+        #content > a {
+            font-size: 25px;
+            text-decoration: none;
+            color: #e74c3c;
+            background-color: white;
+            border: 4px solid black;
+            border-radius: 10px;
+            padding: 15px 15px;
+        }
+
     </style>
 </head>
 <body>
-
 
 
 <div class="form">
@@ -114,13 +119,10 @@
 </div>
 
 
-
-
 <div id="map"></div>
 
 <div id="content">
     <a href="${trends.URL}">${trends.name}</a>
-
 </div>
 <script>
 
