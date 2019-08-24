@@ -117,13 +117,13 @@
 </div>
 <div class="form">
     <form method="post" action="find-trend">
-        Place: <input class="param" type="text" name="param"/><br/><br/>
-        <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
+        Wpisz miejsce na świcie (.ang): <input class="param" type="text" name="param"/><br/><br/>
+        <input class="button" type="submit" name="Submit" value="Zatwierdź"/><br/><br/>
     </form>
 </div>
 <div class="main-menu"><a href="/main">Menu</a></div>
 
-<h2>Trends: </h2>
+<h2>Lista trendów: </h2>
 
 <#list trendList as trend>
     <ol><a href="${trend.URL}">${trend.name}</a></ol>

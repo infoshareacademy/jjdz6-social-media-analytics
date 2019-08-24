@@ -119,20 +119,20 @@
     </style>
 </head>
 <body>
-<h1>@Find User</h1>
+<h1>@Znajdź użytkownika</h1>
 <img src="http://aux4.iconspalace.com/uploads/7425575651630862538.0-twitter-256"/>
 <div class="main-menu"><a href="/main">Menu</a></div>
 <div class="form">
     <form method="post" action="search-user">
-       Name:  <input class="textOfname" type="text" name="nameOfUser"/><br/><br/>
-        <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
+       Wpisz nazwę użytownika:  <input class="textOfname" type="text" name="nameOfUser"/><br/><br/>
+        <input class="button" type="submit" name="Submit" value="Zatwierdź"/><br/><br/>
     </form>
 </div>
 
 
 <#list users as user>
-    <li class="nameUser"> @Twitter name: ${user.name}</li>
-    <li class="countFollow">Count of followers: ${user.followers}</li>
+    <li class="nameUser"> @Użytkownik: ${user.name}</li>
+    <li class="countFollow">Liczba followersów: ${user.followers}</li>
     <li class="status">${user.status}</li>
 </#list>
 

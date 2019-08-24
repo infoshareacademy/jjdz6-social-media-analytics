@@ -150,8 +150,8 @@
 <div class="main-menu"><a href="/main">Menu</a></div>
 <div class="form">
     <form method="post" action="map-trends">
-        Place: <input class="place" type="text" name="place"/><br/><br/>
-        <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
+        Wpisz miejsce na świecie (.ang): <input class="place" type="text" name="place"/><br/><br/>
+        <input class="button" type="submit" name="Submit" value="Zatwierdź"/><br/><br/>
     </form>
 </div>
 <div id="content">
