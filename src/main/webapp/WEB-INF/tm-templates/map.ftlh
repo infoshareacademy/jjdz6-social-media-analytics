@@ -139,27 +139,25 @@
         .image>img {
             border: 6px solid deepskyblue;
         }
-
-
-
+*#map {
+    margin:  0 auto;
+    height: 800px;
+    width: 800px;
+}
     </style>
 </head>
 <body>
-<div class="image"><img src="http://www.clker.com/cliparts/9/5/7/0/1297286085795787133world-globe-md.png" alt=""></div>
-
+<div class="main-menu"><a href="/main">Menu</a></div>
 <div class="form">
     <form method="post" action="map-trends">
         Place: <input class="place" type="text" name="place"/><br/><br/>
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
 </div>
-<div class="main-menu"><a href="/main">Menu</a></div>
-
-<div id="map"></div>
-
 <div id="content">
     <a href="${trends.URL}">${trends.name}</a>
 </div>
+<div id="map"></div>
 <script>
 
     var map, popup, Popup;

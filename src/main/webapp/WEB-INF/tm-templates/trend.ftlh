@@ -50,24 +50,31 @@
             color: whitesmoke;
         }
 
-        ol {
+        ol>a{
+            display: block;
+            margin:  5px auto;
             font-size: 21px;
             text-align: center;
             list-style: none;
+            width: 250px;
+            padding: 10px 10px;
+            background-color: white;
+            border: 3px solid deepskyblue;
+            color: black;
+            text-decoration: none;
+
         }
 
         a {
 
             text-decoration: none;
-            color: whitesmoke;
+            color: black;
 
         }
 
-        a:hover {
 
-            font-size: 20px;
 
-        }
+
 
         .button:hover {
             font-size: 15px;
@@ -75,13 +82,20 @@
 
         }
 
-        .main-menu {
+        .main-menu>a{
             text-align: center;
             position: absolute;
+            font-size: 25px;
             right: 200px;
             text-decoration: none;
             text-underline: none;
 
+
+        }
+
+        .main-menu>a:hover {
+            color: white;
+            font-size: 30px;
         }
         img {
             border: 2px solid skyblue;
@@ -95,6 +109,10 @@
         .button {
             font-size: 18px;
         }
+
+
+
+
 
     </style>
 </head>
