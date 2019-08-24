@@ -27,7 +27,7 @@ public class MainServlet extends HttpServlet {
         String googleUserName = (String) req.getSession().getAttribute("name");
         model.put("name", googleUserName);
 
-        String googleUserName = (String) req.getSession().getAttribute("google_name");
+
         String email = (String) req.getSession().getAttribute("email");
         model.put("google_name", googleUserName);
 
