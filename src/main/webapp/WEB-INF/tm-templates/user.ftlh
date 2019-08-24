@@ -114,6 +114,9 @@
             border-radius: 20px;
 
         }
+        .countFollow {
+            color: #e74c3c;
+        }
 
 
     </style>

@@ -37,19 +37,16 @@ public class MapTrendsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final String place = req.getParameter("place");
+
         Cookie cookie = new Cookie("find-by-map", place);
         cookie.setMaxAge(60);
         resp.addCookie(cookie);
-
-
+        Map<String, Object> model = new HashMap<>();
         TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(place);
         Coordinates coordinates = trendMapService.getCoordinates(place);
 
-
-        Map<String, Object> model = new HashMap<>();
         model.put("trends", dt);
         model.put("coord", coordinates);
-
 
         Template template = templateProvider.getTemplate(getServletContext(), "map.ftlh");
         try {

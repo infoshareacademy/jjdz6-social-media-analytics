@@ -31,6 +31,7 @@
         #navigation-bar ul {
             border-radius: 4px;
             overflow: hidden;
+            padding: 20px 20px;
         }
 
         #navigation-bar li {
@@ -114,7 +115,6 @@
             <li><a href="find-trend"><i class="fas fa-poll"></i><span>Lista Trendów</span></a></li>
             <li><a href="map-trends"><i class="fas fa-globe-americas"></i><span>Mapa Trendów</span></a></li>
             <li><a href="search-user"><i class="fa fa-user"></i><span>Szukaj użytkownika</span></a></li>
-            <#--<li><a href="cookie-reader"><i class="fa fa-user"></i><span>Cookie-reader</span></a></li>-->
 
             <#if name??>
                 <li class="nav-item">
