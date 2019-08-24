@@ -31,6 +31,7 @@
         #navigation-bar ul {
             border-radius: 4px;
             overflow: hidden;
+            padding: 20px 20px;
         }
 
         #navigation-bar li {
@@ -47,7 +48,7 @@
             color: #848484;
             font-size: 20px;
             text-decoration: none;
-            text-align: center;
+            text-align: center;git
             padding: 20px 0;
             display: block;
             position: relative;
@@ -111,11 +112,10 @@
 <div id="menu-nav">
     <div id="navigation-bar">
         <ul>
-            <li><a href="tweet-search"><i class="fa fa-search"></i><span>Search Tweets</span></a></li>
-            <li><a href="find-trend"><i class="fas fa-poll"></i><span>Trend</span></a></li>
-            <li><a href="map-trends"><i class="fas fa-globe-americas"></i><span>Trend Map</span></a></li>
-            <li><a href="search-user"><i class="fa fa-user"></i><span>Search User</span></a></li>
-            <#--<li><a href="cookie-reader"><i class="fa fa-user"></i><span>Cookie-reader</span></a></li>-->
+
+            <li><a href="find-trend"><i class="fas fa-poll"></i><span>Lista Trendów</span></a></li>
+            <li><a href="map-trends"><i class="fas fa-globe-americas"></i><span>Mapa Trendów</span></a></li>
+            <li><a href="search-user"><i class="fa fa-user"></i><span>Szukaj użytkownika</span></a></li>
 
             <#if name??>
                 <li class="nav-item">

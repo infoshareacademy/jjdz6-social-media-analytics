@@ -1,38 +1,24 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>#Trend Map</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <style>
         /* Always set the map height explicitly to define the size of the div
-         * element that contains the map. */
-        #map {
-            height: 100%;
-        }
+                * element that contains the map. */
+
 
         /* Optional: Makes the sample page fill the window. */
         html, body {
-            height: 1080px;
             margin: 0;
             padding: 0;
             background-color: #3aabef;
         }
 
-
-        .form {
-            margin: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 25px;
-            font-family: sans-serif;
-            text-align: center;
-        }
-
+        #map {
+            height: 100%;
 
         }
 
@@ -89,7 +75,7 @@
             width: 200px;
         }
 
-        .main-menu>a {
+        .main-menu > a {
             display: block;
             margin: 0 auto;
             text-align: center;
@@ -112,80 +98,213 @@
             padding: 15px 15px;
         }
 
-        .button {
+        #contentWarsaw {
             text-align: center;
-            padding: 20px 20px;
-            font-size: 20px;
-            color: black;
-            border-radius: 20px;
-
-        }
-
-        .button:hover {
-            background-color: #e74c3c;
-            color: white;
-        }
-
-        .place {
             font-size: 25px;
-            border-radius: 20px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
         }
 
-        .image {
-           text-align: center;
-
+        #contentBerlin {
+            text-align: center;
+            font-size: 25px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
         }
 
-        .image>img {
-            border: 6px solid deepskyblue;
+        #contentParis {
+            text-align: center;
+            font-size: 25px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
         }
-*#map {
-    margin:  0 auto;
-    height: 800px;
-    width: 800px;
-}
+
+        #contentItaly {
+            text-align: center;
+            font-size: 25px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
+        }
+
+        #contentMoscow {
+            text-align: center;
+            font-size: 25px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
+        }
+
+        #contentSweden {
+            text-align: center;
+            font-size: 25px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
+        }
+
+        #contentUkraine {
+            text-align: center;
+            font-size: 25px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
+        }
+
+        #contentNorway {
+            text-align: center;
+            font-size: 25px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
+        }
+
+        #contentEngland {
+            text-align: center;
+            font-size: 25px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
+        }
+        #contentChina {
+            text-align: center;
+            font-size: 25px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
+        }
+        #contentNewYork {
+            text-align: center;
+            font-size: 25px;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 10px;
+        }
     </style>
 </head>
 <body>
-<div class="main-menu"><a href="/main">Menu</a></div>
-<div class="form">
-    <form method="post" action="map-trends">
-        Wpisz miejsce na świecie (.ang): <input class="place" type="text" name="place"/><br/><br/>
-        <input class="button" type="submit" name="Submit" value="Zatwierdź"/><br/><br/>
-    </form>
-</div>
-<div id="content">
-    <a href="${trends.URL}">${trends.name}</a>
-</div>
 
 <div id="map"></div>
+<div id="contentWarsaw">
+    ${trendsWarsaw.name}
+</div>
+<div id="contentBerlin">
+    ${trendsBerlin.name}
+</div>
+<div id="contentParis">
+    ${trendsParis.name}
+</div>
+
+<div id="contentItaly">
+    ${trendsItaly.name}
+</div>
+
+<div id="contentMoscow">
+    ${trendsMoscow.name}
+</div>
+<div id="contentSweden">
+    ${trendsSweden.name}
+</div>
+<div id="contentUkraine">
+    ${trendsUkraine.name}
+</div>
+<div id="contentNorway">
+    ${trendsNorway.name}
+</div>
+
+<div id="contentEngland">
+    ${trendsEngland.name}
+</div>
+<div id="contentChina">
+    ${trendsChina.name}
+</div>
+<div id="contentNewYork">
+    ${trendsNewYork.name}
+</div>
+
+
 <script>
 
-    var map, popup, Popup;
-    var lat = parseFloat(${coord.lat});
-    var lnn = parseFloat(${coord.ln});
-
-    /** Initializes the map and the custom popup. */
     function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: lat, lng: lnn},
-            zoom: 5,
+        var myLatLng = {lat: 52.363, lng: 21.044};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: myLatLng
         });
 
         Popup = createPopupClass();
         popup = new Popup(
-            new google.maps.LatLng(lat, lnn),
-            document.getElementById('content'));
+            new google.maps.LatLng(52.866, 21.044),
+            document.getElementById('contentWarsaw'));
         popup.setMap(map);
+
+        Popup2 = createPopupClass();
+        popup2 = new Popup2(
+            new google.maps.LatLng(51.133481, 10.018343),
+            document.getElementById('contentBerlin'));
+        popup2.setMap(map);
+
+        Popup3 = createPopupClass();
+        popup3 = new Popup3(
+            new google.maps.LatLng(48.8566, 2.3522),
+            document.getElementById('contentParis'));
+        popup3.setMap(map);
+
+        Popup4 = createPopupClass();
+        popup4 = new Popup4(
+            new google.maps.LatLng(41.8947, 12.4839),
+            document.getElementById('contentItaly'));
+        popup4.setMap(map);
+
+        Popup5 = createPopupClass();
+        popup5 = new Popup5(
+            new google.maps.LatLng(55.7522, 37.6156),
+            document.getElementById('contentMoscow'));
+        popup5.setMap(map);
+
+        Popup6 = createPopupClass();
+        popup6 = new Popup6(
+            new google.maps.LatLng(59.3326, 18.0649),
+            document.getElementById('contentSweden'));
+        popup6.setMap(map);
+
+        Popup7 = createPopupClass();
+        popup7 = new Popup7(
+            new google.maps.LatLng(50.4547, 30.5238),
+            document.getElementById('contentUkraine'));
+        popup7.setMap(map);
+
+
+        Popup8 = createPopupClass();
+        popup8 = new Popup8(
+            new google.maps.LatLng(59.9139, 10.7522),
+            document.getElementById('contentNorway'));
+        popup8.setMap(map);
+
+        Popup9 = createPopupClass();
+        popup9 = new Popup9(
+            new google.maps.LatLng(51.5085, -2.1244),
+            document.getElementById('contentEngland'));
+        popup9.setMap(map);
+
+        Popup10 = createPopupClass();
+        popup10 = new Popup10(
+            new google.maps.LatLng(39.9288,	116.3890 ),
+            document.getElementById('contentChina'));
+        popup10.setMap(map);
+
+        Popup11 = createPopupClass();
+        popup11 = new Popup11(
+            new google.maps.LatLng(40.730610, -73.935242),
+            document.getElementById('contentNewYork'));
+        popup11.setMap(map);
     }
 
-    /**
-     * Returns the Popup class.
-     *
-     * Unfortunately, the Popup class can only be defined after
-     * google.maps.OverlayView is defined, when the Maps API is loaded.
-     * This function should be called by initMap.
-     */
+
     function createPopupClass() {
         /**
          * A customized popup on the map.
@@ -249,7 +368,11 @@
 
         return Popup;
     }
+
+
 </script>
+
+
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7PCQggzOtF1cQbGw_Gfho06NLBApfvBA&callback=initMap">
 </script>

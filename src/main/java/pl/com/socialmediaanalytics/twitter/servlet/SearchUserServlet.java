@@ -35,14 +35,14 @@ public class SearchUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-         String nameOfUser = req.getParameter("nameOfUser");
-         List<UserDTO> statusList = searchUserService.userDTOList(nameOfUser);
+        String nameOfUser = req.getParameter("nameOfUser");
+        List<UserDTO> statusList = searchUserService.userDTOList(nameOfUser);
 
         Cookie cookie = new Cookie("find-by-user", nameOfUser);
         cookie.setMaxAge(60);
         resp.addCookie(cookie);
 
-        if (nameOfUser==null) {
+        if (nameOfUser == null) {
 
             resp.getWriter().print("User doesn't exist");
             return;

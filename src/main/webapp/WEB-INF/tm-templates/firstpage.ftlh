@@ -19,27 +19,37 @@
 
         }
 
+     body {
+         text-align: center;
 
+     }
 
         a {
-
-            margin-bottom: 50px;
-            margin-top: 50px;
+            background-color: skyblue;
+            display: inline-block;
+            margin: 100px auto;
+            width: 500px;
             padding: 40px 40px;
             font-family: Arial,sans-serif;
-            display: block;
-            text-align: center;
             text-transform: uppercase;
             text-decoration: none;
-            font-size: 40px;
+            font-size: 30px;
             color: white;
+        }
+        a:hover{
+            background-color: white;
+            color: #3aabef;
         }
 
 
       img {
           display: block;
           margin: 0 auto;
+          height: 300px;
+          width: 300px;
       }
+
+
 
 
 
@@ -48,7 +58,7 @@
 <body>
 
 <a class="login" href="http://localhost:8080/googlelogin">Zaloguj</a>
-<a class="logout" href="main">Start Bez Logowania</a>
+<a class="" href="http://localhost:8080/maps-stream">Start Bez Logowania</a>
 
 <img src="https://thumbor.sd-cdn.fr/wtvqeXqkR0A7PMZrUt3h9Q9_DDU=/770x515/cdn.sd-cdn.fr/wp-content/uploads/2019/03/Twitter-logo-illustration.jpg" alt="">
 
