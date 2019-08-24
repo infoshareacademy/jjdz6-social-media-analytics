@@ -33,12 +33,18 @@ public class SearchUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Optional<String> nameOfUser = Optional.ofNullable(req.getParameter("param"));
-        Cookie cookie = new Cookie("find-by-user",nameOfUser.orElse("Param doesn't exist"));
+        final String nameOfUser = req.getParameter("nameOfUser");
+
+
+        Cookie cookie = new Cookie("find-by-user", nameOfUser);
         cookie.setMaxAge(60);
         resp.addCookie(cookie);
 
-        List<UserDTO> statusList = searchUserService.userDTOList(nameOfUser.orElse("Param doesn't exist"));
+        if (nameOfUser==null || nameOfUser.isEmpty()) {
+            resp.getWriter().print("User doesn't exist");
+            return;
+        }
+        List<UserDTO> statusList = searchUserService.userDTOList(nameOfUser);
         Map<String, List<UserDTO>> model = new HashMap<>();
 
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
@@ -64,7 +70,7 @@ public class SearchUserServlet extends HttpServlet {
         try {
             template.process(model, resp.getWriter());
         } catch (TemplateException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 }

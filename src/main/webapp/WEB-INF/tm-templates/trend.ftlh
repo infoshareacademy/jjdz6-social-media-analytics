@@ -91,7 +91,7 @@
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
 </div>
-<div class="main-menu"><a href="/main">Main Menu</a></div>
+<div class="main-menu"><a href="/main">Menu</a></div>
 
 <h2>Trends: </h2>
 

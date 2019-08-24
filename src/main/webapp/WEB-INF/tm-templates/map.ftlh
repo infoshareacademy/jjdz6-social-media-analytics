@@ -93,7 +93,7 @@
 </head>
 <body>
 
-<div class="main-menu"><a href="/main">Main Menu</a></div>
+<div class="main-menu"><a href="/main">Menu</a></div>
 
 <div class="form">
     <form method="post" action="map-trends">
@@ -109,6 +109,7 @@
 
 <div id="content">
        <a href="${trends.URL}">${trends.name}</a>
+
 </div>
 <script>
 

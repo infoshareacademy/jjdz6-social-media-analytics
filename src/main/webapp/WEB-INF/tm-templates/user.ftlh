@@ -29,9 +29,6 @@
             color: whitesmoke;
         }
 
-        .nameList {
-            font-size: 20px;
-        }
 
         img {
             display: block;
@@ -61,43 +58,77 @@
 
         }
 
+        .button {
+            padding: 25px 25px;
+            color: white;
+            font-size: 18px ;
+            border-radius: 10px;
+            background-color: cornflowerblue;
 
-        button:hover {
-            font-size: 15px;
+        }
+
+
+        .button:hover {
+            font-size: 20px;
             color: black;
+            background-color: white;
 
         }
 
         .nameUser {
+            padding: 10px 10px;
             font-size: 30px;
         }
 
-        .main-menu {
+
+
+
+        .status {
+            background-color: white;
+            color: black;
+            text-align: justify;
+            display: block;
+            margin:  15px auto;
+            max-height: 400px;
+            width: 400px;
+            padding:  20px 20px;
+            border: 2px solid darkblue;
+        }
+
+        a {
             text-align: center;
             position: absolute;
             right: 200px;
             text-decoration: none;
-            text-underline: none;
+            font-size: 20px;
+            color: white;
 
         }
+        .textOfname {
+            font-size: 25px;
+
+        }
+
+
 
     </style>
 </head>
 <body>
-<h1>#Find User</h1>
+<h1>@Find User</h1>
 <img src="http://aux4.iconspalace.com/uploads/7425575651630862538.0-twitter-256"/>
+<div class="main-menu"><a href="/main">Menu</a></div>
 <div class="form">
     <form method="post" action="search-user">
-        #Twitter User: <input type="text" name="name"/><br/><br/>
+        <input class="textOfname" type="text" name="nameOfUser"/><br/><br/>
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
 </div>
-<div class="main-menu"><a href="/main">Main Menu</a></div>
+
 
 <#list users as user>
-    <li class="nameUser">${user.name}</li>
-    <li>${user.status}</li>
-    <li><img src="${user.imageURL}" alt="image of user"></li>
+    <li class="nameUser"> @Twitter name: ${user.name}</li>
+    <li class="countFollow">Count of followers: ${user.followers}</li>
+    <li class="status">${user.status}</li>
 </#list>
 
 
