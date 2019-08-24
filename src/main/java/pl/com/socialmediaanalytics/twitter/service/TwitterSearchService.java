@@ -1,11 +1,9 @@
 package pl.com.socialmediaanalytics.twitter.service;
 
-import pl.com.socialmediaanalytics.twitter.configurator.TwitterInstance;
 import twitter4j.*;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,22 +11,26 @@ import java.util.List;
 public class TwitterSearchService {
 
     @Inject
-    TwitterInstance twitterInstance;
+    TwitterInstanceService twitterInstanceService;
 
-    public List<String> searchtweets(String userQuery) throws TwitterException {
-        Twitter twitter = twitterInstance.getTwitterInstance();
+    public List<Status> searchTweets(String userQuery, String date, String lang, String type )
+            throws TwitterException {
+
+        Twitter twitter = twitterInstanceService.getTwitterInstance();
         Query query = new Query(userQuery);
-        QueryResult result = twitter.search(query);
 
-        List<String> tweetList = new ArrayList<String>();
-        result.getTweets();
-        for (Status tweet : result.getTweets()) {
-            String json = TwitterObjectFactory.getRawJSON(tweet);
-            tweetList.add(json);
+        if(!type.equals("all")) {
+            Query.ResultType resultType = Query.ResultType.valueOf(type);
+            query.setResultType(resultType);
         }
 
-        return tweetList;
-    }
+        query.setUntil(date);
+        query.lang(lang);
+        QueryResult result;
 
+        result = twitter.search(query);
+
+        return result.getTweets();
+    }
 
 }

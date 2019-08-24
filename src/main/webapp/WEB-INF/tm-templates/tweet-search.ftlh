@@ -1,20 +1,13 @@
-<!doctype html>
-<html lang="pl-PL">
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="google-signin-client_id"
-          content="343502052313-psu5l3v39klko54udt2h4g93i5nmnb5u.apps.googleusercontent.com">
-    <title>Social Meida Analytics</title>
+    <meta name="google-signin-client_id" content="343502052313-psu5l3v39klko54udt2h4g93i5nmnb5u.apps.googleusercontent.com">
+    <title>Social Media Analytics</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             background: #3aabef;
             font: normal 300 18px "Roboto", sans-serif;
@@ -79,61 +72,50 @@
         }
 
         .footer {
-            display: block;
-            margin: 0 auto;
             background-color: #FFF;
             position: fixed;
+            margin-top: 10px;
             bottom: 0;
             width: 100%;
             text-align: center;
-            color: #848484;
-        }
-
-        .google-name {
-            margin: 0 auto;
-            text-align: center;
-            padding: 20px 20px;
-            width: 500px;
-            background-color:white;
-            color:#848484;
-
+            color: black;
         }
     </style>
-</head>
-
 <body>
-<div class="container">
-    <#if google_name??>
-    <h3 class="heading-statistics">Zalogowany jako: ${google_name}</h3>
-    </#if>
+
+<form name="searchForm" method="post" action = "tweet-search">
+    <p>Wprowadź kryteria wyszukiwania: </p>
+        Typ: <select name= "option">
+            <option value="popular">Najpopularniejsze</option>
+            <option value="recent">Najnowsze</option>
+            <option value="mixed">Mieszane</option>
+            <option value="all">Wszystkie</option>
+        </select>
+        Szukana fraza: <input name= "text" type="text">
+        Data: <input name = "date" type = "date" value="${currentDate}">
+        Kod języka (ISO 639-1): <input name="lang" type="text" maxlength="2" value="pl">
+        <input type = "submit" value="Szukaj">
+    </h5>
+    </p>
+</form>
+<#if errorMessage??>
+<span style="color: #1314ff;">${errorMessage}</span><br/><br/>
+</#if>
+<div>
+    <ul>
+        <#if tweets??>
+            <#list tweets as tweetPresentationObject>
+                <#include "tweet.ftlh">
+            </#list>
+        </#if>
+    </ul>
+
 </div>
-
-<div id="menu-nav">
-    <div id="navigation-bar">
-        <ul>
-            <li><a href="tweet-search"><i class="fa fa-search"></i><span>Search Tweets</span></a></li>
-            <li><a href="find-trend"><i class="fas fa-poll"></i><span>Trend</span></a></li>
-            <li><a href="map-trends"><i class="fas fa-globe-americas"></i><span>Trend Map</span></a></li>
-            <li><a href="search-user"><i class="fa fa-user"></i><span>Search User</span></a></li>
-            <#--<li><a href="cookie-reader"><i class="fa fa-user"></i><span>Cookie-reader</span></a></li>-->
-
-            <#if name??>
-                <li class="nav-item">
-                    <a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/logout">Wyloguj</a>
-                </li>
-            <#else>
-                <li><a href="http://localhost:8080/googlelogin">Zaloguj</a>
-                </li>
-            </#if>
-
-        </ul>
+<div><div style="margin-bottom: 20px;">
+        <#if tweets??><a href="/download?option=${option}&text=${text}&lang=${lang}&date=${date}">Pobierz w formacie JSON</a></#if>
     </div>
-
 </div>
-<div class="google-name">Zalogowany jako: ${name}</div>
 
 </body>
-<div class="footer">
-    <#include "footer.ftlh">
-</div>
+
 </html>
