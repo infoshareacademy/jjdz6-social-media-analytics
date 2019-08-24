@@ -10,19 +10,26 @@
         #map {
             height: 100%;
         }
+
         /* Optional: Makes the sample page fill the window. */
         html, body {
-            height: 100%;
+            height: 1080px;
             margin: 0;
             padding: 0;
             background-color: #3aabef;
         }
-      .form {
-            background-color: white;
-            background-image: url('searchicon.png');
-            background-position: 10px 10px;
-            background-repeat: no-repeat;
-            padding-left: 40px;
+
+
+
+        .form {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
 
         }
 
@@ -46,8 +53,9 @@
             font-family: sans-serif;
             overflow-y: auto;
             max-height: 60px;
-            box-shadow: 0px 2px 10px 1px rgba(0,0,0,0.5);
+            box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
         }
+
         /* The parent of the bubble. A zero-height div at the top of the tip. */
         .popup-bubble-anchor {
             /* Position the div a fixed distance above the tip. */
@@ -56,6 +64,7 @@
             bottom: /* TIP_HEIGHT= */ 8px;
             left: 0;
         }
+
         /* This element draws the tip. */
         .popup-bubble-anchor::after {
             content: "";
@@ -72,6 +81,7 @@
             border-right: 6px solid transparent;
             border-top: /* TIP_HEIGHT= */ 8px solid white;
         }
+
         /* JavaScript will position this div at the bottom of the popup tip. */
         .popup-container {
             cursor: auto;
@@ -93,13 +103,14 @@
 </head>
 <body>
 
-<div class="main-menu"><a href="/main">Menu</a></div>
+
 
 <div class="form">
     <form method="post" action="map-trends">
-        Country/City: <input type="text" name="place"/><br/><br/>
+        Place: <input type="text" name="place"/><br/><br/>
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
+    <div class="main-menu"><a href="/main">Menu</a></div>
 </div>
 
 
@@ -108,7 +119,7 @@
 <div id="map"></div>
 
 <div id="content">
-       <a href="${trends.URL}">${trends.name}</a>
+    <a href="${trends.URL}">${trends.name}</a>
 
 </div>
 <script>
@@ -116,6 +127,7 @@
     var map, popup, Popup;
     var lat = parseFloat(${coord.lat});
     var lnn = parseFloat(${coord.ln});
+
     /** Initializes the map and the custom popup. */
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -125,7 +137,7 @@
 
         Popup = createPopupClass();
         popup = new Popup(
-            new google.maps.LatLng(lat,lnn),
+            new google.maps.LatLng(lat, lnn),
             document.getElementById('content'));
         popup.setMap(map);
     }
@@ -163,23 +175,24 @@
             // Optionally stop clicks, etc., from bubbling up to the map.
             google.maps.OverlayView.preventMapHitsAndGesturesFrom(this.containerDiv);
         }
+
         // ES5 magic to extend google.maps.OverlayView.
         Popup.prototype = Object.create(google.maps.OverlayView.prototype);
 
         /** Called when the popup is added to the map. */
-        Popup.prototype.onAdd = function() {
+        Popup.prototype.onAdd = function () {
             this.getPanes().floatPane.appendChild(this.containerDiv);
         };
 
         /** Called when the popup is removed from the map. */
-        Popup.prototype.onRemove = function() {
+        Popup.prototype.onRemove = function () {
             if (this.containerDiv.parentElement) {
                 this.containerDiv.parentElement.removeChild(this.containerDiv);
             }
         };
 
         /** Called each frame when the popup needs to draw itself. */
-        Popup.prototype.draw = function() {
+        Popup.prototype.draw = function () {
             var divPosition = this.getProjection().fromLatLngToDivPixel(this.position);
 
             // Hide the popup when it is far out of view.

@@ -62,8 +62,9 @@
             padding: 25px 25px;
             color: white;
             font-size: 18px ;
+            border: 4px solid white;
             border-radius: 10px;
-            background-color: cornflowerblue;
+            background-color: deepskyblue;
 
         }
 
