@@ -1,11 +1,11 @@
-package pl.com.socialmediaanalytics.twitter;
+package pl.com.socialmediaanalytics.twitter.servlet;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import pl.com.socialmediaanalytics.twitter.freemarker.TemplateProvider;
+import pl.com.socialmediaanalytics.twitter.configurator.TemplateProvider;
 import pl.com.socialmediaanalytics.twitter.presentation.MediaEntityDTO;
 import pl.com.socialmediaanalytics.twitter.presentation.OriginalStatusDTO;
-import pl.com.socialmediaanalytics.twitter.presentation.TweetPresentationObject;
+import pl.com.socialmediaanalytics.twitter.presentation.TweetPresentationObjectDTO;
 import pl.com.socialmediaanalytics.twitter.service.TwitterSearchService;
 import twitter4j.*;
 
@@ -60,6 +60,8 @@ public class TwitterSearchServlet extends HttpServlet {
         String textParam = req.getParameter("text");
         String langParam = req.getParameter("lang");
         String dateParam = req.getParameter("date");
+
+        resp.setContentType("text/html;charset=UTF-8");
         PrintWriter writer = resp.getWriter();
 
         Map<String, Object> model = new HashMap<>();
@@ -68,7 +70,14 @@ public class TwitterSearchServlet extends HttpServlet {
 
         if(optionParam == null || optionParam.isEmpty() || textParam == null && textParam.isEmpty()
                 || langParam == null|| langParam.isEmpty() || dateParam == null || dateParam.isEmpty()) {
-
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            writer.println("<H1>" + resp.getStatus() + "- BAD REQUEST!</H1>");
+            return;
+        } else {
+            model.put("option", optionParam);
+            model.put("text", textParam);
+            model.put("lang", langParam);
+            model.put("date", dateParam);
         }
 
         if(!Arrays.asList(Locale.getISOLanguages()).contains(langParam)) {
@@ -97,13 +106,14 @@ public class TwitterSearchServlet extends HttpServlet {
             //);
         }
 
-        List<TweetPresentationObject> tweets = new ArrayList<>();
+        List<TweetPresentationObjectDTO> tweets = new ArrayList<>();
 
         if(statuses.isEmpty()) {
             model.put("errorMessage","Nie znaleziono wyników dla podanych kryteriów. Spróbuj innych kryteriów.");
         }
 
         for (Status status : statuses) {
+            System.out.println();
             OriginalStatusDTO originalStatusDTO = new OriginalStatusDTO();
             List<MediaEntityDTO> mediaURLList = new ArrayList<>();
             List<String> hashtagList = new ArrayList<>();
@@ -212,7 +222,7 @@ public class TwitterSearchServlet extends HttpServlet {
                     retweetedUrlList);
         }
 
-            tweets.add(new TweetPresentationObject(
+            tweets.add(new TweetPresentationObjectDTO(
                     status.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                     status.getUser().getName(),
                     status.getUser().getScreenName(),

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-public class TweetPresentationObject {
+public class TweetPresentationObjectDTO {
 
     private LocalDate createdAt;
     private String userName;
@@ -18,8 +18,8 @@ public class TweetPresentationObject {
     private List<String> urlList;
     private OriginalStatusDTO originalStatusDTO;
 
-    public TweetPresentationObject(LocalDate createdAt, String userName, String screenName, String usersProfileImageURL, String text, Integer favouriteCount,
-                                   Integer retweetCount, List<MediaEntityDTO> mediaURLList, List<String> hashtagList, List<String> urlList, OriginalStatusDTO originalStatusDTO) {
+    public TweetPresentationObjectDTO(LocalDate createdAt, String userName, String screenName, String usersProfileImageURL, String text, Integer favouriteCount,
+                                      Integer retweetCount, List<MediaEntityDTO> mediaURLList, List<String> hashtagList, List<String> urlList, OriginalStatusDTO originalStatusDTO) {
         this.createdAt = createdAt;
         this.userName = userName;
         this.screenName = screenName;

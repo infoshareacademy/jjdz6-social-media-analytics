@@ -19,7 +19,7 @@ public class TwitterSearchService {
         Twitter twitter = twitterInstanceService.getTwitterInstance();
         Query query = new Query(userQuery);
 
-        if(!type.equals("Wszystkie")) {
+        if(!type.equals("all")) {
             Query.ResultType resultType = Query.ResultType.valueOf(type);
             query.setResultType(resultType);
         }
