@@ -27,6 +27,10 @@
             left: 50%;
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
+            color: white;
+            font-size: 25px;
+            font-family: sans-serif;
+            text-align: center;
         }
 
 
@@ -85,10 +89,13 @@
             width: 200px;
         }
 
-        .main-menu {
+        .main-menu>a {
+            display: block;
+            margin: 0 auto;
             text-align: center;
-            position: absolute;
-            right: 200px;
+            /*position: absolute;*/
+            /*right: 250px;*/
+            color: white;
             text-decoration: none;
             text-underline: none;
 
@@ -105,19 +112,48 @@
             padding: 15px 15px;
         }
 
+        .button {
+            text-align: center;
+            padding: 20px 20px;
+            font-size: 20px;
+            color: black;
+            border-radius: 20px;
+
+        }
+
+        .button:hover {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .place {
+            font-size: 25px;
+            border-radius: 20px;
+        }
+
+        .image {
+           text-align: center;
+
+        }
+
+        .image>img {
+            border: 6px solid deepskyblue;
+        }
+
+
+
     </style>
 </head>
 <body>
-
+<div class="image"><img src="http://www.clker.com/cliparts/9/5/7/0/1297286085795787133world-globe-md.png" alt=""></div>
 
 <div class="form">
     <form method="post" action="map-trends">
-        Place: <input type="text" name="place"/><br/><br/>
+        Place: <input class="place" type="text" name="place"/><br/><br/>
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
-    <div class="main-menu"><a href="/main">Menu</a></div>
 </div>
-
+<div class="main-menu"><a href="/main">Menu</a></div>
 
 <div id="map"></div>
 

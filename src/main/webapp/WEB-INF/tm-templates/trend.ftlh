@@ -8,8 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Find By Trend</title>
     <style>
-        * {
+
+        html {
             background-color: #3aabef;
+        }
+        * {
+
             font-family: 'Lato', sans-serif;
         }
 
@@ -25,8 +29,9 @@
         .form {
 
             text-align: center;
-            font-size: 20px;
+            font-size: 25px;
             color: whitesmoke;
+            padding: 20px 20px;
 
 
         }
@@ -64,7 +69,7 @@
 
         }
 
-        button:hover {
+        .button:hover {
             font-size: 15px;
             color: black;
 
@@ -78,6 +83,18 @@
             text-underline: none;
 
         }
+        img {
+            border: 2px solid skyblue;
+        }
+
+        .param {
+             font-size: 20px;
+             border-radius: 20px;
+        }
+
+        .button {
+            font-size: 18px;
+        }
 
     </style>
 </head>
@@ -87,7 +104,7 @@
 </div>
 <div class="form">
     <form method="post" action="find-trend">
-        Country/City: <input type="text" name="param"/><br/><br/>
+        Place: <input class="param" type="text" name="param"/><br/><br/>
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
 </div>

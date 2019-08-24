@@ -10,8 +10,12 @@
         * {
             margin: 0;
             padding: 0;
-            background-color: #3aabef;
+
             font-family: 'Lato', sans-serif;
+        }
+
+        html {
+            background-color: #3aabef;
         }
 
         li {
@@ -61,7 +65,7 @@
         .button {
             padding: 25px 25px;
             color: white;
-            font-size: 18px ;
+            font-size: 18px;
             border: 4px solid white;
             border-radius: 10px;
             background-color: deepskyblue;
@@ -78,10 +82,9 @@
 
         .nameUser {
             padding: 10px 10px;
-            font-size: 30px;
+            font-size: 25px;
+            border-radius: 20px;
         }
-
-
 
 
         .status {
@@ -89,10 +92,10 @@
             color: black;
             text-align: justify;
             display: block;
-            margin:  15px auto;
+            margin: 15px auto;
             max-height: 400px;
             width: 400px;
-            padding:  20px 20px;
+            padding: 20px 20px;
             border: 2px solid darkblue;
         }
 
@@ -105,11 +108,12 @@
             color: white;
 
         }
+
         .textOfname {
             font-size: 25px;
+            border-radius: 20px;
 
         }
-
 
 
     </style>
@@ -120,7 +124,7 @@
 <div class="main-menu"><a href="/main">Menu</a></div>
 <div class="form">
     <form method="post" action="search-user">
-        <input class="textOfname" type="text" name="nameOfUser"/><br/><br/>
+       Name:  <input class="textOfname" type="text" name="nameOfUser"/><br/><br/>
         <input class="button" type="submit" name="Submit" value="Submit"/><br/><br/>
     </form>
 </div>
