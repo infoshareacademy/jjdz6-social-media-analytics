@@ -38,7 +38,7 @@
 
 
         h1 {
-            text-align: center;
+            text-align: justify;
             font-size: 35px;
             color: whitesmoke;
 
@@ -73,18 +73,14 @@
         }
 
 
-
-
-
-        .button:hover {
-            font-size: 15px;
-            color: black;
-
+        .button {
+            width: 150px;
         }
 
         .main-menu>a{
             text-align: center;
             position: absolute;
+            padding: 20px;
             font-size: 25px;
             right: 200px;
             text-decoration: none;
@@ -93,10 +89,7 @@
 
         }
 
-        .main-menu>a:hover {
-            color: white;
-            font-size: 30px;
-        }
+
         img {
             border: 2px solid skyblue;
         }
@@ -107,7 +100,9 @@
         }
 
         .button {
-            font-size: 18px;
+            font-size: 20px;
+            padding: 10px 10px;
+            border-radius: 20px;
         }
 
 
