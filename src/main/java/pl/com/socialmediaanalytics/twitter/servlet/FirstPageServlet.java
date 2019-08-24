@@ -14,25 +14,25 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@WebServlet("/first")
+public class FirstPageServlet extends HttpServlet {
 
-@WebServlet("/sign-in-out")
-public class SignInOutServlet extends HttpServlet {
     @Inject
-    TemplateProvider templateProvider;
+    private TemplateProvider templateProvider;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        Template template = templateProvider.getTemplate(getServletContext(), "firstpage.ftlh");
+        Map<String, Object> model = new HashMap<>();
+        String googleUserName = (String) req.getSession().getAttribute("name");
+        model.put("name", googleUserName);
 
-
-
-        Template template =  templateProvider.getTemplate(getServletContext(),"sign.ftlh");
-        Map<String,Object>model = new HashMap<>();
-        model.put("name","Krzysztof");
 
         try {
-            template.process(model,resp.getWriter());
+            template.process(model, resp.getWriter());
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -14,6 +14,7 @@ import twitter4j.User;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,15 +25,29 @@ import java.util.*;
 @WebServlet("/search-user")
 public class SearchUserServlet extends HttpServlet {
     @Inject
-    TemplateProvider templateProvider;
+    private TemplateProvider templateProvider;
 
     @Inject
-    SearchUserService searchUserService;
+    private SearchUserService searchUserService;
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String user = req.getParameter("user");
-        List<UserDTO> statusList = searchUserService.userDTOList(user);
+
+
+         String nameOfUser = req.getParameter("nameOfUser");
+         List<UserDTO> statusList = searchUserService.userDTOList(nameOfUser);
+
+        Cookie cookie = new Cookie("find-by-user", nameOfUser);
+        cookie.setMaxAge(60);
+        resp.addCookie(cookie);
+
+        if (nameOfUser==null) {
+
+            resp.getWriter().print("User doesn't exist");
+            return;
+        }
+
         Map<String, List<UserDTO>> model = new HashMap<>();
 
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
@@ -50,13 +65,15 @@ public class SearchUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.setCharacterEncoding("UTF-8");
         Map<String, List<String>> model = new HashMap<>();
         model.put("users", Collections.emptyList());
         Template template = templateProvider.getTemplate(getServletContext(), "user.ftlh");
         try {
             template.process(model, resp.getWriter());
         } catch (TemplateException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 }

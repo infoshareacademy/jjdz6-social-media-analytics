@@ -11,6 +11,7 @@ import pl.com.socialmediaanalytics.twitter.service.TrendTDOService;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,21 +25,28 @@ public class MapTrendsServlet extends HttpServlet {
 
      private Logger logger;
     @Inject
-    TemplateProvider templateProvider;
+  private   TemplateProvider templateProvider;
 
     @Inject
-    TrendTDOService trendTDOService;
+   private TrendTDOService trendTDOService;
 
     @Inject
-    TrendMapService trendMapService;
+   private TrendMapService trendMapService;
 
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        final String place = req.getParameter("place");
+        Cookie cookie = new Cookie("find-by-map",place);
+        cookie.setMaxAge(60);
+        resp.addCookie(cookie);
 
-        String param =  req.getParameter("place");
+
+        TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(place);
+        Coordinates coordinates = trendMapService.getCoordinates(place);
+
         if (param != null){
             logger.info("Param place is null");
         }
@@ -46,9 +54,10 @@ public class MapTrendsServlet extends HttpServlet {
         TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(param);
         Coordinates coordinates = trendMapService.getCoordinates(param);
 
+
         Map<String, Object> model = new HashMap<>();
-        model.put("trends",dt);
-        model.put("coord",coordinates);
+        model.put("trends", dt);
+        model.put("coord", coordinates);
 
 
         Template template = templateProvider.getTemplate(getServletContext(), "map.ftlh");
@@ -57,14 +66,15 @@ public class MapTrendsServlet extends HttpServlet {
         } catch (TemplateException te) {
             te.printStackTrace();
         }
-
     }
+
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        resp.setCharacterEncoding("UTF-8");
         Map<String, Object> model = new HashMap<>();
-
         model.put("lat",new Object());
         model.put("ln",new Object());
         model.put("trends",new Object());
