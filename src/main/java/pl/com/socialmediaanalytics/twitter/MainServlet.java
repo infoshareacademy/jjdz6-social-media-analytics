@@ -34,7 +34,7 @@ public class MainServlet extends HttpServlet {
                 throws ServletException, IOException {
 
             Map<String, Object> model = new HashMap<>();
-            Template template = templateProvider.getTemplate(getServletContext(), "tweetSearchForm.ftlh");
+            Template template = templateProvider.getTemplate(getServletContext(), "tweetSearch.ftlh");
 
 
             model.put("main", null);

@@ -3,8 +3,7 @@ package pl.com.socialmediaanalytics.twitter.presentation;
 import java.time.LocalDate;
 import java.util.List;
 
-
-public class TweetPresentationObject {
+public class OriginalStatusDTO {
 
     private LocalDate createdAt;
     private String userName;
@@ -16,10 +15,12 @@ public class TweetPresentationObject {
     private List<MediaEntityDTO> mediaURLList;
     private List<String> hashtagList;
     private List<String> urlList;
-    private OriginalStatusDTO originalStatusDTO;
 
-    public TweetPresentationObject(LocalDate createdAt, String userName, String screenName, String usersProfileImageURL, String text, Integer favouriteCount,
-                                   Integer retweetCount, List<MediaEntityDTO> mediaURLList, List<String> hashtagList, List<String> urlList, OriginalStatusDTO originalStatusDTO) {
+    public OriginalStatusDTO() {
+    }
+
+    public OriginalStatusDTO(LocalDate createdAt, String userName, String screenName, String usersProfileImageURL,
+                             String text, Integer favouriteCount, Integer retweetCount, List<MediaEntityDTO> mediaURLList, List<String> hashtagList, List<String> urlList) {
         this.createdAt = createdAt;
         this.userName = userName;
         this.screenName = screenName;
@@ -30,7 +31,6 @@ public class TweetPresentationObject {
         this.mediaURLList = mediaURLList;
         this.hashtagList = hashtagList;
         this.urlList = urlList;
-        this.originalStatusDTO = originalStatusDTO;
     }
 
 
@@ -68,13 +68,5 @@ public class TweetPresentationObject {
 
     public List<String> getHashtagList() {
         return hashtagList;
-    }
-
-    public List<String> getUrlList() {
-        return urlList;
-    }
-
-    public OriginalStatusDTO getOriginalStatusDTO() {
-        return originalStatusDTO;
     }
 }
