@@ -17,11 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Logger;
 
 @WebServlet("/map-trends")
 
 public class MapTrendsServlet extends HttpServlet {
 
+     private Logger logger;
     @Inject
   private   TemplateProvider templateProvider;
 
@@ -32,6 +34,7 @@ public class MapTrendsServlet extends HttpServlet {
    private TrendMapService trendMapService;
 
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -40,8 +43,17 @@ public class MapTrendsServlet extends HttpServlet {
         cookie.setMaxAge(60);
         resp.addCookie(cookie);
 
+
         TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(place);
         Coordinates coordinates = trendMapService.getCoordinates(place);
+
+        if (param != null){
+            logger.info("Param place is null");
+        }
+
+        TrendDTO dt = trendTDOService.getTrendDTObyCoordinates(param);
+        Coordinates coordinates = trendMapService.getCoordinates(param);
+
 
         Map<String, Object> model = new HashMap<>();
         model.put("trends", dt);
@@ -63,9 +75,9 @@ public class MapTrendsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> model = new HashMap<>();
-        model.put("lat", new Object());
-        model.put("ln", new Object());
-        model.put("trends", new Object());
+        model.put("lat",new Object());
+        model.put("ln",new Object());
+        model.put("trends",new Object());
         Template template = templateProvider.getTemplate(getServletContext(), "map.ftlh");
         try {
             template.process(model, resp.getWriter());
